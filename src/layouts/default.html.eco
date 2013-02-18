@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<!-- Meta -->
+	<meta charset="utf-8" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+	<!-- Use the .htaccess and remove these lines to avoid edge case issues.
+	   More info: h5bp.com/i/378 -->
+	<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
+
+	<!-- Our site title and description -->
+	<title><%= @getPreparedTitle() %></title>
+	<meta name="description" content="<%= @getPreparedDescription() %>" />
+	<meta name="keywords" content="<%= @getPreparedKeywords() %>" />
+	<meta name="author" content="<%= @site.author or "" %>" />
+
+	<!-- Output DocPad produced meta elements -->
+	<%- @getBlock("meta").toHTML() %>
+
+	<!-- Mobile viewport optimized: h5bp.com/viewport -->
+	<meta name="viewport" content="width=device-width" />
+
+	<!-- Icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+	<!-- Shims: IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+		<script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+    <% styles = @getBlock("styles") %>
+	<% styles.add(["/vendor/twitter-bootstrap/css/bootstrap.css","/vendor/twitter-bootstrap/css/bootstrap-responsive.css"]) %>
+    <% styles.add(["/vendor/highlightjs-mustard.css"]) %>
+    <% styles.add(["/styles/style.css"]) %>
+    <% styles.add(["http://fonts.googleapis.com/css?family=Domine|Droid+Sans+Mono|Six+Caps|Oswald:400,300"]) %>
+    <%- styles.toHTML() %>
+</head>
+<body>
+	<!-- Markup -->
+    <!--
+	<div class="navbar navbar-fixed-top">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="brand" href="/">Welcome</a>
+			</div>
+		</div>
+	</div>
+    -->
+
+	<div class="container" id="site">
+        <div class="row">
+        
+            <div id="left">
+                <div class="span3 content">
+                    <a href="/"><img src="/img/logo.png" id="logo" /></a>
+                    
+                    <a class="btn btn-primary visible-phone" data-toggle="collapse" data-target="#menu">
+                        menu
+                    </a>
+                    <div class="collapse" id="menu">
+                        <ul class="nav nav-list">
+                            <% for document in @getCollection('pages').toJSON(): %>
+                                <li about="<%= document.url %>" class="<%= 'active'  if @document.url is document.url %>">
+                                    <a href="<%= document.url %>" ><%= document.title %></a>
+                                </li>
+                            <% end %>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="span9 offset3" id="main">
+                <%- @content %>
+            </div>
+        </div>
+    
+		<footer>
+			<p>&copy; Company 2012</p>
+			<p style="float:right;">
+				This website was last updated at <%= @site.date.toISOString() %>
+			</p>
+		</footer>
+	</div><!-- /container -->
+
+	<!-- Scripts -->
+    <% scripts = @getBlock('scripts') %>
+    <% scripts.add(["/vendor/jquery.js","/vendor/log.js","/vendor/modernizr.js"]) %>
+    <% scripts.add(["/vendor/twitter-bootstrap/js/bootstrap.min.js"]) %>
+    <% scripts.add(["/scripts/script.js"]) %>
+    <%- scripts.toHTML() %>
+</body>
+</html>

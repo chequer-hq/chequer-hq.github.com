@@ -1,0 +1,91 @@
+.-background-image(@spec) {
+	background-image: e(%(@spec, "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-"));  
+	background-image: e(%(@spec, "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-"));  
+	background-image: e(%(@spec, "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-"));  
+	background-image: e(%(@spec, "-o-", "-o-", "-o-", "-o-", "-o-", "-o-", "-o-", "-o-"));  
+	background-image: e(%(@spec, "", "", "", "", "", "", "", ""));  
+}
+
+.-background(@spec) {
+	background: e(%(@spec, "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-", "-moz-"));  
+	background: e(%(@spec, "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-", "-webkit-"));  
+	background: e(%(@spec, "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-", "-ms-"));  
+	background: e(%(@spec, "-o-", "-o-", "-o-", "-o-", "-o-", "-o-", "-o-", "-o-"));  
+	background: e(%(@spec, "", "", "", "", "", "", "", ""));  
+}
+
+.-linear-gradient(@gradient) {
+    background-image: -moz-linear-gradient(@gradient);    
+    background-image: -webkit-linear-gradient(@gradient);    
+    background-image: -ms-linear-gradient(@gradient);    
+    background-image: linear-gradient(@gradient);    
+}
+.-linear-gradient(@direction, @color1, @color2) {
+	@gradient: "@{direction}, @{color1}, @{color2}";
+	.-linear-gradient(e(@gradient));
+}
+.-linear-gradient(@direction, @color1, @color2, @color3) {
+	@gradient: "@{direction}, @{color1}, @{color2}, @{color3}";
+	.-linear-gradient(e(@gradient));
+}
+.-linear-gradient(@direction, @color1, @color2, @color3, @color4) {
+	@gradient: "@{direction}, @{color1}, @{color2}, @{color3}, @{color4}";
+	.-linear-gradient(e(@gradient));
+}
+
+.-transition(@what: all 0.2s ease-in-out) {
+	-webkit-transition: @what;
+	-moz-transition: @what;
+	-o-transition: @what;
+	transition: @what;
+} 
+
+.-box-sizing(@type: border-box) {
+    -moz-box-sizing: @type;
+    -webkit-box-sizing: @type;
+    -o-box-sizing: @type;
+    -ms-box-sizing: @type;
+    box-sizing: @type;
+}
+
+.-box-shadow(@shadow) {
+	-webkit-box-shadow: @shadow;
+	-moz-box-shadow: @shadow;
+	-o-box-shadow: @shadow;
+	-ie-box-shadow: @shadow;
+	box-shadow: @shadow;
+}
+
+.-border-radius(@radius) {
+    -moz-border-radius: @radius;
+    -webkit-border-radius: @radius;
+    border-radius: @radius;
+}
+
+.-columns(@count, @width:auto, @gap: 0, @rule:0) {
+	-moz-column-count:@count;
+	-moz-column-width:@width;
+	-moz-column-rule:@rule;
+	-moz-column-gap:@gap;	
+	-webkit-column-count:@count;
+	-webkit-column-rule:@rule;
+	-webkit-column-gap:@gap;	 
+	-webkit-column-width:@width;
+	column-count:@count;
+	column-rule:@rule;
+	column-gap:@gap;	
+	column-width:@width;
+	
+	
+}
+
+.-columns-fallback(@count, @width:auto, @gap: 0, @rule:0) {
+	.-columns(@count, @width, @gap, @rule);
+	.no-csscolumns &>* {
+		display:inline-block; 
+		vertical-align:top; 
+		margin-right:@gap;
+		width:@width;
+	}
+}
+
