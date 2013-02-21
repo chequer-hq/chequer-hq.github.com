@@ -2,62 +2,100 @@
 title: Language
 tags: ['page']
 layout: default
-pageOrder: 3
+pageOrder: 30
 ---
 
-Chequer Query Language
-======================
+<h1>Chequer Query Language</h1>
 
-Query language is modelled a bit after MongoDB. 
-At least the operators start with '$' (use single quotes or escape!) and share the same names where possible.
-
-Chequer uses three syntaxes at the same time:
-
-* basic comparison - very basic, see below
-* [key:rule][keyrule] - very fast, based on hashmaps (mongo-like), great for key lookups
-* [shorthand][shorthand] - parsed language, based on strings (sql-like), great for complex queries
-
-Every query operation assumes, that you ask if a `value` matches the `rule`.
+Chequer uses three syntaxes at the same time.
 
 Whenever there is a reference to `query` it may be:
 
-* `Chequer` - the `Chequer` object with a query
-* `scalar` (`string`, `int` etc.) - the value should match the query (with type conversion - 1 == '1')
-  * With an exception, that strings starting with `$` are assumed to be in [shorthand syntax][shorthand].<br/>
-    To use the string, you have to prefix it with '\' (`\$tring!` will match '$tring!'). You should not
-    escape any other character! If you don't use shorthand, you can turn it off entirely.
-* `null` - the value should be exactly `null`
-* `false` - the value should be exactly `false`
-* `true` - the value should be anything `true` in PHP
-* `array` - a complex query in [key:rule syntax][keyrule]
-* `$string` - strings starting with `$` are complex queries in [shorthand syntax][shorthand]
+<dl class="dl-horizontal">
+  <dt>`Chequer`</dt>
+  <dd>the `Chequer` object with a query</dd>
+  <dt>`$string`</dt>
+  <dd>strings starting with `$` are complex queries in sql-like [shorthand syntax][shorthand] <br/>
+      great for complex queries</dd>
+  <dt>`string` or `number`</dt>
+  <dd>the value should equal the query (with type conversion: 1 == '1')</dd>
+  <dt>`null`</dt>
+  <dd>the value should be exactly `null`</dd>
+  <dt>`false`</dt>
+  <dd>the value should be exactly `false`</dd>
+  <dt>`true`</dt>
+  <dd>the value should not be `false`</dd>
+  <dt>`hashmap`</dt>
+  <dd>a complex query in mongodb-like [key:rule syntax][keyrule]<br/>
+      great for fast queries, or/and lists, hashmap digging</dd>
+</dl>
+
+You can mix them together however you please:
+```js
+[
+  null,           // value may be null (comparison)
+  '$gt' : 20,     // or be bigger than 20 (key:rule)
+  '$~ foo.*bar',  // or match this regular expression (shorthand)
+  ['foo', 'bar'], // or be any of these (key:rule + comparison)
+]
+```
 
 ---------------------------------------------------
 
 Key:rule syntax
 ===============
-[keyrule]: #key-rule-syntax
+[keyrule]: #key:rule-syntax
 
-A complex query with any combination of following **key** => **rule**:
+Key:rule syntax is modelled a bit after MongoDB. 
+At least the operators start with '$' (use single quotes or escape!) and share the same names where possible.
 
-* `'$operator'` => operator's parameter <br/>
-    one of special operators - ([see operators](#operators))
-* `'$'` => `bool` | `'AND'` | `'OR'`  <br/>
-  `true` and `'AND'` will set this query to `AND` mode, `false` and `'OR'` will set it to `OR`
-* `string` => `query`  <br/>
-  check the value's `subkey` with the `query` - ([see subkeys](#subkeys))
-* `'@typecast'` => `query`<br/>
-  get the `typecast` value and check it against the `query` - ([see typecasts](#typecasts))
-* `'@typecast()'` => `query`<br/>
-  convert current value using the `typecast` and check it against the `query` - ([see typecasts](#typecasts))
-* `'.subkey1.subkey2'` => `query`<br/>
-  check the value's two (and more) `subkey`s deep with the `query` - ([see subkeys](#subkeys))
-* `int` => `query`  <br/>
-  check the `value` with the `query`
-* `'$ shorthand'` => `query` <br/>
-  [shorthand query][shorthand] which will be checked with the `query`
+Query is a hashmap with any combination of following `key` `:` `rule` pairs:
 
-### Match All (AND) / Match Any (OR) in complex queries
+* `'$operator'` `:` operator's parameter<br/>
+    use [operator](operators.html) on the `value`
+    ```php
+    ['$gt' : 20] // greater than 20
+    ```
+* `'$'` `:` `bool` | `'AND'` | `'OR'`  <br/>
+  `true` and `'AND'` will set this query to `AND` mode, `false` and `'OR'` will set it to `OR`.<br/> 
+  [Read about query mode](#matchall).
+  ```js
+  [ "$" : 'OR', '$gt' : 10, '$lt' : -10 ] // > 10 OR < -10
+  ```
+* `string` `:` `query`  <br/>
+  check the value's `subkey` with the `query`.
+  [Read about subkeys][dotnotation].
+  ```js
+  [ 'foo' : 'bar' ] // check if value.foo == 'bar'
+  ```
+* `'.subkey1.subkey2'` `:` `query`<br/>
+  check the value's two (and more) `subkey`s deep with the `query`
+  ```js
+  [ '.foo.bar' : 'baz' ] // check if value.foo.bar == 'baz'
+  ```
+* `'@typecast'` `:` `query`<br/>
+  get the `typecast` value and check it against the `query`. <br/>
+  [Read about typecasts](typecasts.html).
+  ```js
+  [ '@time' : ['$gt' : '2013-01-01'] ] // check if typecast @time is greater than 2013
+  ```
+* `'@typecast()'` `:` `query`<br/>
+  convert current value using the `typecast` and check it against the `query`.<br/>
+  [Read about typecasts](typecasts.html).
+* `int` `:` `query`  <br/>
+  Ignore the `key` and simply check the `value` with the `query`<br/>
+  Note, that when using arrays their keys are `int`s.
+  ```js
+  [ 'foo', 'bar', '$~ foo.*bar' ] // match 'foo', 'bar' or shorthand regexp
+  ```
+* `'$ shorthand'` `:` `query` <br/>
+  Evaluate [shorthand syntax][shorthand] and check it with the `query`
+  ```js
+  [ '$ + 1' : 2 ] // check if current value + 1 equals 2
+  ```
+
+
+<h3 id="matchall"> Match All (AND) / Match Any (OR) in complex queries </h3>
 
 By default, every rule in a query should match. This is the `AND` mode. Queries that match a simple
 scalar will default to `OR`.
@@ -77,6 +115,44 @@ OR:  ['foo', '$regex' => 'bar'] // because element with index 0 is a scalar
 OR:  ['$' => 'OR', '$regex' => 'foo', '$not' => 'foobar'] // because of '$'=>'OR'
 OR:  ['$or' => ['$regex' => 'foo', '$not' => 'foobar']] // because of $or
 ```
+
+
+# Subkeys, dot notation
+[dotnotation]: #subkeys--dot-notation
+
+Subkey can be:
+
+* array's key 
+* object's property
+* object's method when using `()` brackets <br/>
+  `Chequer::checkValue(new SplFileInfo(), ['getSize()' => ['$gt' => 0]])`
+
+You can access multiple subkeys at once by using the `dot notation`. You have to start with a `.` (dot)
+and join subkeys with a dot like this: `.subkey.method().another_one`. To reference the value itself,
+use the `.` itself. <br/>
+If you have a subkey with a dot, use standard notation without the `.` prefix, like this: `subkey.with.a.dot`.
+
+If the subkey does not exist in the value, and the value is an 0-indexed array, Chequer will traverse this
+array in search for the first array/object having this key. You can control this behaviour by using
+`setDeepArrays()`. Note, that two different queries may match in two different subitems.
+
+Like here:
+```php
+Chequer::checkValue([
+    'foo' => 'bar', 
+    ['some' => 'thing'],
+    ['hello' => 'world'],
+    ['hello' => 'bye']
+], ['foo' => true, 'some' => true, 'hello' => true]);
+```
+
+We are looking for 'foo', 'some' and 'hello' keys, but the 'hello' and 'some' are defined inside the subitems. 
+However, they *will* be discovered, because the array has continuous keys starting from 0. 
+
+Note however, that `['hello' => 'bye']` will not match, because the first element takes the precedence.
+
+
+
 
 Shorthand syntax
 ================
@@ -98,10 +174,10 @@ But this:
 // check if 'foo.txt' was modified around a week ago
 Chequer::checkValue('foo.txt', '$ $abs(@time.now - 1 week - @file().mtime) < 1 day');
 ```
-is doable in key:rule, but rather very hard.
+is doable in key:rule, but rather not very beatyfull.
 
 Note, that you can disable this syntax by using setShorthandSyntax(). This way, you will not have to
-worry about strings starting with '$'.
+worry about strings starting with `$`.
 
 ### Dollar
 Every shorthand should start with a dollar sign `$`. If first element is an operator, you can

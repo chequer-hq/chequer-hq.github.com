@@ -82,6 +82,11 @@ docpadConfig = {
 		commands: (database) ->
 			database.findAllLive({command: $exists: true}, ['command.name':1])
 
+	plugins:
+		marked:
+			markedOptions:
+				breaks: false
+				anchors: true
 
 	# =================================
 	# DocPad Events
@@ -111,9 +116,6 @@ docpadConfig = {
 				else
 					next()
                     
-    plugins:
-        marked:
-            breaks: true
 }
 
 

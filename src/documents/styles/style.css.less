@@ -31,16 +31,16 @@ body {
 
 body {
     @media (max-width: 767px) {
-        font-size:14pt;
+        font-size:13pt;
     }
     @media (min-width: 768px) and (max-width: 979px) {
         font-size:12pt;
     }
     @media (min-width: 980px) and (max-width:1199px) {
-        font-size:15pt;
+        font-size:12pt;
     }
     @media (min-width: 1200px) {
-        font-size:16pt;
+        font-size:13pt;
     }
 }
 
@@ -75,7 +75,7 @@ strong, b {
     font-weight:400;
 }
 
-em, i {
+em {
     color:#000;
     font-style:normal;
 }
@@ -123,6 +123,17 @@ li {
     margin:0.5em 0em;
 }
 
+.stickit-active {
+    position: absolute;
+}
+.stickem {
+    margin-top:-10px;
+}
+.stickit {
+    position: fixed;
+    margin-top:auto;
+}
+
 #site {
 
 }
@@ -168,6 +179,43 @@ li {
           */          
    
     }
+
+    #menu {
+        margin-left:0;
+        .nav {
+            margin-right: 30px;
+            ul li {
+                margin:0;
+                padding:0;
+                list-style: none;
+                text-align: right;
+                line-height: 110%;
+                margin-top:0.3em;
+                /*
+                text-overflow: ellipsis;
+                overflow: hidden;
+                white-space: nowrap;                
+                */
+                a {
+                    color:#fff;
+                    font-size:0.9em;
+                }
+                &.active {
+                    text-decoration: underline;
+                }
+            }
+            .toc {
+                margin-top:1.5em;
+                font-size:0.9em;
+                .anchor-h1 {
+                    margin-top:0.7em;
+                }
+                .anchor-h2, .anchor-h3 {
+                    font-size:0.9em;
+                }
+            }
+        }
+    }
     
     &:after {
         position:absolute;
@@ -180,28 +228,66 @@ li {
         .-background("%s@{backPageflip}"); 
     }
     
-    @media (max-width: 767px) {
-        @backShadow: "linear-gradient(bottom, rgba(0,0,0,1) 0px,rgba(0,0,0,0.5) 4px,rgba(0,0,0,0.2) 10px, rgba(0,0,0,0) 20px) 0px 100% repeat-x";
-        .-background("@{backPattern}, %s@{backShadow}, %s@{backLight} @{backColor}"); 
-        background-size:auto, auto;
+    div.toc-button {
+        position:absolute;
+        right:10px;
+        bottom:10px;
+        a {
+            font-size:1em;
+        }
+        .toc-selector {
+            position:absolute;
+            left:5px;
+            right:0;
+            top:0;
+            bottom:0;
+            width:auto;
+            opacity:0;
+            filter: Alpha(Opacity=0);
+            z-index:1;
+        }
+    }
 
+    /* phone */
+    @media (max-width: 767px) {
+        background:none;
         position:relative;
         margin-left:-20px;
         margin-right:-20px;
         
+        &:after {display:none};
+
         .content {
-            padding-left:20px;
+            padding-left:0px;
+            height:150px;
         }
         
         #logo {
             width:auto;
-            height:100px;
+            height:80%;
+            margin-top:10px;
         }
         
         #menu {
-            height:0px;
+
+            @backShadow: "linear-gradient(bottom, rgba(0,0,0,1) 0px,rgba(0,0,0,0.5) 4px,rgba(0,0,0,0.2) 10px, rgba(0,0,0,0) 20px) 0px 100% repeat-x";
+            .-background("@{backPattern}, %s@{backShadow}, %s@{backLight} @{backColor}"); 
+            background-size:auto, auto;
+
+            height:150px;
+            width:100%;
+            margin:0px;
+            padding:0px;
+            top:0px!important;
+            &.stickit {
+                height:50px;
+                #logo {
+                    margin:0px;
+                }
+            }
         }
     }
+    /* the rest */
     @media (min-width: 768px) {
         #menu {
             /* always visible */
@@ -215,7 +301,7 @@ li {
 #main {
     margin-top:20px;
     
-    :first-child {
+    :first-child, a:first-child+* {
         margin-top:0px;
     }
 }
@@ -258,4 +344,17 @@ pre code {
     font-family:'Droid Sans Mono', Consolas, monospace;
     font-size: 0.8em;
     line-height:150%;
+}
+
+footer {
+    text-align: right;
+    margin-top:40px;
+    border-top:1px solid @colorText;
+    padding-top:20px;
+    padding-bottom:20px;
+    font-size:0.7em;
+    color:lighten(@colorText, 20%);
+    p {
+        margin:0.2em;
+    }
 }
