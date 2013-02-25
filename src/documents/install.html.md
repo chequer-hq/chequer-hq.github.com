@@ -27,8 +27,13 @@ and used in this documentation.
 In a more traditional manner, you can add the Chequer library to you include path, or auto loader, as it is
 PSR-0 compliant. You can also use a single file `Chequer.php`, as long as you refrain from using typecasts.
 
-<a href="https://github.com/panrafal/chequer-php" class="btn btn-primary"><i class="icon-github"></i> View on GitHub</a>
-<a href="https://github.com/panrafal/chequer-php/archive/master.zip" class="btn"><i class="icon-download-alt"></i> Download ZIP</a>
 
-[![Build Status](https://travis-ci.org/panrafal/chequer-php.png?branch=master)](https://travis-ci.org/panrafal/chequer-php)
+<div class="well text-center">
+    <a href="https://github.com/panrafal/chequer-php" class="btn btn-primary"><i class="icon-github"></i> View on GitHub</a>
+    <a href="https://github.com/panrafal/chequer-php/archive/master.zip" class="btn"><i class="icon-download-alt"></i> Download ZIP</a>
+    <p>
+        [![Build Status](https://travis-ci.org/panrafal/chequer-php.png?branch=master)](https://travis-ci.org/panrafal/chequer-php)
+    </p>
+</div>
+
 

@@ -6,7 +6,7 @@ pageOrder: 1
 ---
 
 <div class="row herow">
-    <div class="span6">
+    <div class="span9">
         <h1>The sparkling new language for checking things in a sane way</h1>
         <small>
             Match scalars, arrays, objects and grumpy cats against the query of Your choice!
@@ -23,12 +23,12 @@ pageOrder: 1
             Query *any* type of data for a result. 
             This way you can filter, validate, check and gather information.
         </p>
-        <a class="btn" href="language.html">the language</a>
+        <a class="btn" href="language.html"><i class="icon-beaker"></i> the Language</a>
     </div>
     <div class="span3">
         <h2>Crossplatform</h2>
         <p>
-            Designed to be easely portable and crossplatform. 
+            Designed to be crossplatform and portable. 
             Write the queries once, use them anywhere.
         </p>
 
@@ -39,10 +39,9 @@ pageOrder: 1
     <div class="span3">
         <h2>Reusable</h2>
         <p>
-            Separate validation rules from your code, and reuse them!
-            Just like you do with config and templates.
+            Separate validation rules from your code, and reuse them! Just like config files and templates.
         </p>
-        <a class="btn" href="usage.html">examples</a>
+        <a class="btn" href="usage.html"><i class="icon-hand-right"></i> Examples</a>
     </div>
 </div>
 

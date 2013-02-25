@@ -39,7 +39,7 @@
     <% styles.add(["/vendor/highlightjs-mustard.css"]) %>
     <% styles.add(["/styles/style.css"]) %>
     <% styles.add(["/vendor/fontawesome/css/font-awesome.min.css"]) %>
-    <% styles.add(["http://fonts.googleapis.com/css?family=Domine|Droid+Sans+Mono|Six+Caps|Oswald:400,300"]) %>
+    <% styles.add(["http://fonts.googleapis.com/css?family=Domine|Open+Sans|Droid+Sans|Roboto+Condensed|Roboto|Droid+Sans+Mono|Six+Caps|Oswald:400,300"]) %>
     <%- styles.toHTML() %>
 </head>
 <body>

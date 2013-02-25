@@ -11,24 +11,29 @@ Chequer uses three syntaxes at the same time.
 
 Whenever there is a reference to `query` it may be:
 
-<dl class="dl-horizontal">
-  <dt>`Chequer`</dt>
-  <dd>the `Chequer` object with a query</dd>
-  <dt>`$string`</dt>
-  <dd>strings starting with `$` are complex queries in sql-like [shorthand syntax][shorthand] <br/>
-      great for complex queries</dd>
-  <dt>`string` or `number`</dt>
-  <dd>the value should equal the query (with type conversion: 1 == '1')</dd>
-  <dt>`null`</dt>
-  <dd>the value should be exactly `null`</dd>
-  <dt>`false`</dt>
-  <dd>the value should be exactly `false`</dd>
-  <dt>`true`</dt>
-  <dd>the value should not be `false`</dd>
-  <dt>`hashmap`</dt>
-  <dd>a complex query in mongodb-like [key:rule syntax][keyrule]<br/>
-      great for fast queries, or/and lists, hashmap digging</dd>
-</dl>
+* `Chequer` <br/>
+  the `Chequer` object with a query
+
+* `$string` <br/>
+  strings starting with `$` are complex queries in sql-like [shorthand syntax][shorthand] <br/>
+  great for complex queries
+
+
+* `string` or `number`<br/>
+  the value should equal the query (with type conversion: 1 == '1')
+
+* `null`<br/>
+  the value should be exactly `null`
+
+* `false`<br/>
+  the value should be exactly `false`
+
+* `true`<br/>
+  the value should not be `false`
+
+* `hashmap`<br/>
+  a complex query in mongodb-like [key:rule syntax][keyrule]<br/>
+  great for fast queries, or/and lists, hashmap digging...
 
 You can mix them together however you please:
 ```js

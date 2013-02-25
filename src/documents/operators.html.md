@@ -13,7 +13,7 @@ shorthand syntax.
 
 ## $and
 ```
-'$and' : [query, query, ...] | scalar
+'$and' | '&&' : [query, query, ...] | scalar
 ```
 
   When array is passed, all queries will have to match. Useful in [key:rule syntax][keyrule].
@@ -49,6 +49,15 @@ shorthand syntax.
 
   When a scalar is passed, then the `value` or `scalar` have to be true. If they are, matching is stopped
   at this level, and `true` is returned. See examples for `$and`.
+
+## $orvalue  
+``` php
+'$orvalue' | '||' : operand
+```
+
+  Returns `value` or `operand`, whichever is true, or `operand` otherwise. Works the same as
+  `value || operand` in JavaScript. If you want the or operator that always returns boolean,
+  use `$or` instead.
 
 ## $not
 ``` js 
