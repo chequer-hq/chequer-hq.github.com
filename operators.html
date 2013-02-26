@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
+
+    <!-- Our site title and description -->
+    <title>Operators | Chequer filtering library</title>
+    <meta name="description" content="The Sparkling New Language For Checking Things In A Sane Way.
+Match scalars, arrays, objects and grumpy cats against the query of Your choice!" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Rafal Lindemann" />
+
+    <!-- Output DocPad produced meta elements -->
+    <meta http-equiv="X-Powered-By" content="DocPad"/>
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+    <!-- Shims: IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles -->
+    
+    
+    
+    
+    
+    
+    <link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap.css" /><link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap-responsive.css" /><link  rel="stylesheet" href="/vendor/highlightjs-mustard.css" /><link  rel="stylesheet" href="/styles/style.css" /><link  rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css" /><link  rel="stylesheet" href="http://fonts.googleapis.com/css?family=Domine|Open+Sans|Droid+Sans|Roboto+Condensed|Roboto|Droid+Sans+Mono|Six+Caps|Oswald:400,300" />
+</head>
+<body>
+    <!-- Markup -->
+    <!--
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Welcome</a>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="container stickem-container" id="site">
+        <div class="row">
+        
+            <div id="left" class="">
+                <div class="span3 content">
+                    <div id="menu" class="stickem span3">
+                        <a href="/"><img src="/img/logo.png" id="logo" /></a>
+                        <span class="visible-phone">
+                            <div class="btn-group toc-button">
+                              <a class="btn dropdown-toggle" href="#" onclick="return false;">
+                                  <select class="toc-selector visible-phone"><option>-- select topic --</option></select>
+                                Menu
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                              </ul>
+                            </div>
+                        </span>
+                        <div class="nav hidden-phone">
+                            <ul class="main">
+                                
+                                    <li about="/index.html" class="">
+                                        <a href="/index.html" >About</a>
+                                    </li>
+                                
+                                    <li about="/install.html" class="">
+                                        <a href="/install.html" >Install</a>
+                                    </li>
+                                
+                                    <li about="/usage.html" class="">
+                                        <a href="/usage.html" >Usage</a>
+                                    </li>
+                                
+                                    <li about="/language.html" class="">
+                                        <a href="/language.html" >Language</a>
+                                    </li>
+                                
+                                    <li about="/operators.html" class="active">
+                                        <a href="/operators.html" >Operators</a>
+                                    </li>
+                                
+                                    <li about="/typecasts.html" class="">
+                                        <a href="/typecasts.html" >Typecasts</a>
+                                    </li>
+                                
+                            </ul>
+
+                            <ul class="toc "></ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+            <div class="span9 offset3" id="main">
+                <a name="operators" class="anchor" target="#operators"></a><h1>Operators</h1>
+<p>Operators start with a <code>$</code>, accept a <code>value</code>, a <code>parameter</code> and return the <code>result</code>. Some operators
+have short versions (<code>!</code>, <code>+</code>, <code>&gt;</code> ...), but they still have to be used with <code>$</code> if outside of the
+shorthand syntax.</p>
+<a name="-and" class="anchor" target="#-and"></a><h2>$and</h2>
+<pre class="highlighted"><code class="r"><span class="string">'$and'</span> | <span class="string">'&amp;&amp;'</span> : [query, query, <span class="keyword">...</span>] | scalar</code></pre>
+<p>  When array is passed, all queries will have to match. Useful in <a href="language#key:rule-syntax">key:rule syntax</a>.</p>
+<p>  When a scalar is matched, then both <code>value</code> and <code>scalar</code> have to be true. Otherwise matching is stopped
+  at this level.</p>
+<pre class="highlighted"><code class="php">  Chequer::checkValue(<span class="keyword">FALSE</span>, [
+    <span class="string">'$and'</span> =&gt; <span class="keyword">true</span>, <span class="comment">// value is FALSE, next rule won't be evaluated</span>
+    <span class="string">'$gt'</span> =&gt; <span class="number">10</span>
+  ]);</code></pre>
+<p>  Watch out for passing arrays in <code>shorthand</code>! This will essentialy call <code>operator_and([1,2,3], [1,2,3])</code>, which means: <br/>
+  <code>value</code> = [1,2,3] must match <code>1</code>, <code>2</code> and <code>3</code>.</p>
+<pre class="highlighted"><code class="php">  Chequer::checkValue([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], <span class="string">'$ . &amp;&amp; .'</span>);</code></pre>
+<p>  But it may be very helpfull too. This will check if <code>value</code> = &#39;foobar&#39; is <code>&quot;foo&quot;</code> or <code>&quot;bar&quot;</code> or matches
+  regular expression <code>/foo/</code>!</p>
+<pre class="highlighted"><code class="php">  Chequer::checkValue(<span class="string">'foobar'</span>, <span class="string">'$ . || "foo", "bar", "$~ foo"'</span>);</code></pre>
+<a name="-or" class="anchor" target="#-or"></a><h2>$or</h2>
+<pre class="highlighted"><code class="php"><span class="string">'$or'</span> : [query, query, ...] | scalar</code></pre>
+<p>  When array is passed, only one query will have to match. Useful in <a href="language#key:rule-syntax">key:rule syntax</a>.</p>
+<p>  When a scalar is passed, then the <code>value</code> or <code>scalar</code> have to be true. If they are, matching is stopped
+  at this level, and <code>true</code> is returned. See examples for <code>$and</code>.</p>
+<a name="-orvalue" class="anchor" target="#-orvalue"></a><h2>$orvalue</h2>
+<pre class="highlighted"><code class="php"><span class="string">'$orvalue'</span> | <span class="string">'||'</span> : operand</code></pre>
+<p>  Returns <code>value</code> or <code>operand</code>, whichever is true, or <code>operand</code> otherwise. Works the same as
+  <code>value || operand</code> in JavaScript. If you want the or operator that always returns boolean,
+  use <code>$or</code> instead.</p>
+<a name="-not" class="anchor" target="#-not"></a><h2>$not</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$not'</span> | <span class="string">'!'</span> : query</code></pre>
+<p>  negates the <code>query</code></p>
+<a name="-regex" class="anchor" target="#-regex"></a><h2>$regex</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$regex'</span> | <span class="string">'~'</span> : <span class="string">'/regexp/flags'</span> | <span class="string">'#regexp#flags'</span> | <span class="string">'~regexp~flags'</span> | <span class="string">'regexp'</span></code></pre>
+<p>  Matches strings using regular expressions.<br/>
+  With third syntax, regular expression is automatically enclosed in &#39;~&#39; character, so it&#39;s safe to use
+  <code>/</code> without escaping.</p>
+<a name="-eq" class="anchor" target="#-eq"></a><h2>$eq</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$eq'</span> | <span class="string">'='</span> | <span class="string">'=='</span> : operand</code></pre>
+<p>  compares <code>value</code> and <code>operand</code> for equality with loose type operator (==)</p>
+<a name="-same" class="anchor" target="#-same"></a><h2>$same</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$same'</span> | <span class="string">'==='</span> : operand</code></pre>
+<p>  compares <code>value</code> and <code>operand</code> for equality using strict operator (===)</p>
+<a name="-nc" class="anchor" target="#-nc"></a><h2>$nc</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$nc'</span> : string</code></pre>
+<p>  not case-sensitive comparison (multibyte)</p>
+<a name="-gt--gte--lt--lte" class="anchor" target="#-gt--gte--lt--lte"></a><h2>$gt $gte $lt $lte</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$gt'</span> | <span class="string">'$gte'</span> | <span class="string">'$lt'</span> | <span class="string">'$lte'</span> | <span class="string">'&gt;'</span> | <span class="string">'&gt;='</span> | <span class="string">'&lt;'</span> | <span class="string">'&lt;='</span> : operand</code></pre>
+<p>  greater-than | lower-than comparisons</p>
+<a name="-between" class="anchor" target="#-between"></a><h2>$between</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$between'</span> : [lower, upper]</code></pre>
+<p>  checks if <code>value</code> is between lower and upper bounds (inclusive)</p>
+<a name="-in" class="anchor" target="#-in"></a><h2>$in</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$in'</span> : [operand, operand, ...]</code></pre>
+<p>  checks if <code>value</code> is on the list</p>
+<a name="-add" class="anchor" target="#-add"></a><h2>$add</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$add'</span> | <span class="string">'+'</span> : operand</code></pre>
+<p>  Addition</p>
+<ul>
+<li>if both values are numeric, they will be added,</li>
+<li>if <code>operand</code> is an array, it will be merged with <code>value</code>,</li>
+<li>if <code>value</code> is an array, but <code>operand</code> is not, it will be pushed,</li>
+<li>otherwise it will concatenate strings</li>
+</ul>
+<a name="-sub" class="anchor" target="#-sub"></a><h2>$sub</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$sub'</span> | <span class="string">'-'</span> : operand</code></pre>
+<p>  Substraction</p>
+<ul>
+<li>if both values are numeric, they will be substracted,</li>
+<li>if <code>operand</code> is an array, it will be substracted from <code>value</code>,</li>
+<li>if <code>value</code> is an array, but <code>operand</code> is not, it will be removed,</li>
+<li>otherwise it will remove the <code>operand</code> from the string</li>
+</ul>
+<a name="-mult" class="anchor" target="#-mult"></a><h2>$mult</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$mult'</span> | <span class="string">'*'</span> : operand</code></pre>
+<p>  Multiplication</p>
+<ul>
+<li>if both values are numeric, they will be multiplicated</li>
+</ul>
+<a name="-div" class="anchor" target="#-div"></a><h2>$div</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$div'</span> | <span class="string">'/'</span> : operand</code></pre>
+<p>  Division</p>
+<ul>
+<li>if both values are numeric, they will be divided</li>
+</ul>
+<a name="-check" class="anchor" target="#-check"></a><h2>$check</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$check'</span> : callable</code></pre>
+<p>  matches if <code>callable($value)</code> returns TRUE</p>
+<a name="-abs" class="anchor" target="#-abs"></a><h2>$abs</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$abs'</span> : value</code></pre>
+<p>  Returns absolute value</p>
+<a name="-size" class="anchor" target="#-size"></a><h2>$size</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$size'</span> : query</code></pre>
+<p>  checks the size of array or string using the <code>query</code></p>
+<a name="-rule" class="anchor" target="#-rule"></a><h2>$rule</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$rule'</span> : [<span class="string">'rulename1'</span>,<span class="string">'rulename2'</span>] | <span class="string">'rulename1 rulename2'</span></code></pre>
+<p>  Allows to reuse predefined rules, which you can set with addRules().
+  You can specify many rules as an array, or space delimited string. </p>
+<p>  If you want to match any of the rules, place <code>OR</code> as one the rule names.</p>
+<p>  If you wan&#39;t a rule to NOT match, prepend it with &#39;!&#39;</p>
+<pre class="highlighted"><code class="php">  <span class="variable">$checker</span>-&gt;query(..., <span class="string">'$rule email lowercase'</span>);
+  <span class="variable">$checker</span>-&gt;query(..., <span class="string">'$rule email AND lowercase'</span>); <span class="comment">// this is equivalent to the former</span>
+  <span class="variable">$checker</span>-&gt;query(..., <span class="string">'$rule email OR lowercase'</span>); <span class="comment">// email or lowercase</span>
+  <span class="variable">$checker</span>-&gt;query(..., <span class="string">'$rule "email OR !lowercase"'</span>); <span class="comment">// email or not lowercase. We have to quote it because of '!'</span></code></pre>
+<a name="-eval" class="anchor" target="#-eval"></a><h2>$eval</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$eval'</span> : [query, query, ...]</code></pre>
+<p>  Evaluates every query by passing the <code>result</code> as the next query&#39;s <code>value</code>.</p>
+<pre class="highlighted"><code class="php">  <span class="comment">// the result is 3:</span>
+  Chequer::checkValue(<span class="number">1</span>, [
+    [<span class="string">'$eval'</span> =&gt; [<span class="string">'$add'</span> =&gt; <span class="number">1</span>, <span class="string">'$add'</span> =&gt; <span class="number">1</span>]]
+  ]);</code></pre>
+
+                <footer>
+                    <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
+                        Mustard - a readable dark theme for web developers!
+                    </a></p>
+                    <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
+<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+ -->                </footer>
+            </div>
+        </div>
+    
+    </div><!-- /container -->
+
+    <!-- Scripts -->
+    
+    
+    
+    
+    
+    <script >(function(){
+	// Did we just livereload?
+var log = true && localStorage && console && console.log && true;
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReloaded at', new Date())
+}
+
+// Listen for the regenerated event
+// and perform a reload of the page when the event occurs
+var listen = function(){
+	var socket = io.connect('/docpad-livereload');
+	socket.on('regenerated',function(){
+		if ( log ) {
+	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+}
+document.location.reload();
+	});
+};
+	if ( typeof io !== 'undefined' ) {
+		listen();
+	} else {
+		// Inject socket.io into our page then listen once loaded
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = true;
+	t.src = '/socket.io/socket.io.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t,s);
+};
+		inject();
+	}
+})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+</body>
+</html>

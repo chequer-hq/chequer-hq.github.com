@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
+
+    <!-- Our site title and description -->
+    <title>Language | Chequer filtering library</title>
+    <meta name="description" content="The Sparkling New Language For Checking Things In A Sane Way.
+Match scalars, arrays, objects and grumpy cats against the query of Your choice!" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Rafal Lindemann" />
+
+    <!-- Output DocPad produced meta elements -->
+    <meta http-equiv="X-Powered-By" content="DocPad"/>
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+    <!-- Shims: IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles -->
+    
+    
+    
+    
+    
+    
+    <link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap.css" /><link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap-responsive.css" /><link  rel="stylesheet" href="/vendor/highlightjs-mustard.css" /><link  rel="stylesheet" href="/styles/style.css" /><link  rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css" /><link  rel="stylesheet" href="http://fonts.googleapis.com/css?family=Domine|Open+Sans|Droid+Sans|Roboto+Condensed|Roboto|Droid+Sans+Mono|Six+Caps|Oswald:400,300" />
+</head>
+<body>
+    <!-- Markup -->
+    <!--
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Welcome</a>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="container stickem-container" id="site">
+        <div class="row">
+        
+            <div id="left" class="">
+                <div class="span3 content">
+                    <div id="menu" class="stickem span3">
+                        <a href="/"><img src="/img/logo.png" id="logo" /></a>
+                        <span class="visible-phone">
+                            <div class="btn-group toc-button">
+                              <a class="btn dropdown-toggle" href="#" onclick="return false;">
+                                  <select class="toc-selector visible-phone"><option>-- select topic --</option></select>
+                                Menu
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                              </ul>
+                            </div>
+                        </span>
+                        <div class="nav hidden-phone">
+                            <ul class="main">
+                                
+                                    <li about="/index.html" class="">
+                                        <a href="/index.html" >About</a>
+                                    </li>
+                                
+                                    <li about="/install.html" class="">
+                                        <a href="/install.html" >Install</a>
+                                    </li>
+                                
+                                    <li about="/usage.html" class="">
+                                        <a href="/usage.html" >Usage</a>
+                                    </li>
+                                
+                                    <li about="/language.html" class="active">
+                                        <a href="/language.html" >Language</a>
+                                    </li>
+                                
+                                    <li about="/operators.html" class="">
+                                        <a href="/operators.html" >Operators</a>
+                                    </li>
+                                
+                                    <li about="/typecasts.html" class="">
+                                        <a href="/typecasts.html" >Typecasts</a>
+                                    </li>
+                                
+                            </ul>
+
+                            <ul class="toc "></ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+            <div class="span9 offset3" id="main">
+                <h1>Chequer Query Language</h1>
+
+<p>Chequer uses three syntaxes at the same time. You can mix them together however you please:</p>
+<pre class="highlighted"><code class="javascript">[
+  <span class="literal">null</span>,           <span class="comment">// value may be null (basic comparison)</span>
+  <span class="string">'$gt'</span> : <span class="number">20</span>,     <span class="comment">// or be bigger than 20 (key:rule)</span>
+  <span class="string">'$~ foo.*bar'</span>,  <span class="comment">// or match this regular expression (shorthand)</span>
+  [<span class="string">'foo'</span>, <span class="string">'bar'</span>], <span class="comment">// or be any of these (key:rule + comparison)</span>
+]</code></pre>
+<p>Whenever there is a reference to <code>query</code> it may be:</p>
+<ul>
+<li><p><code>Chequer</code> <br/>
+the <code>Chequer</code> object with a query</p>
+</li>
+<li><p><code>$string</code> <br/>
+strings starting with <code>$</code> are complex queries in sql-like <a href="#shorthand-syntax">shorthand syntax</a> <br/>
+great for complex queries</p>
+</li>
+</ul>
+<ul>
+<li><p><code>string</code> or <code>number</code><br/>
+the value should equal the query (with type conversion: 1 == &#39;1&#39;)</p>
+</li>
+<li><p><code>null</code><br/>
+the value should be exactly <code>null</code></p>
+</li>
+<li><p><code>false</code><br/>
+the value should be exactly <code>false</code></p>
+</li>
+<li><p><code>true</code><br/>
+the value should not be <code>false</code></p>
+</li>
+<li><p><code>hashmap</code><br/>
+a complex query in mongodb-like <a href="#key:rule-syntax">key:rule syntax</a><br/>
+great for fast queries, or/and lists, hashmap digging...</p>
+</li>
+</ul>
+<hr>
+<a name="key:rule-syntax" class="anchor" target="#key:rule-syntax"></a><h1>Key:rule syntax</h1>
+<p>Key:rule syntax is modelled a bit after MongoDB. 
+At least the operators start with &#39;$&#39; (use single quotes or escape!) and share the same names where possible.</p>
+<p>Query is a hashmap with any combination of following <code>key</code> <code>:</code> <code>rule</code> pairs:</p>
+<ul>
+<li><code>&#39;$operator&#39;</code> <code>:</code> operator&#39;s parameter<br/>
+  use <a href="operators.html">operator</a> on the <code>value</code><pre class="highlighted"><code class="php">  [<span class="string">'$gt'</span> : <span class="number">20</span>] <span class="comment">// greater than 20</span></code></pre>
+</li>
+<li><code>&#39;$&#39;</code> <code>:</code> <code>bool</code> | <code>&#39;AND&#39;</code> | <code>&#39;OR&#39;</code>  <br/>
+<code>true</code> and <code>&#39;AND&#39;</code> will set this query to <code>AND</code> mode, <code>false</code> and <code>&#39;OR&#39;</code> will set it to <code>OR</code>.<br/> 
+<a href="#matchall">Read about query mode</a>.<pre class="highlighted"><code class="javascript">[ <span class="string">"$"</span> : <span class="string">'OR'</span>, <span class="string">'$gt'</span> : <span class="number">10</span>, <span class="string">'$lt'</span> : -<span class="number">10</span> ] <span class="comment">// &gt; 10 OR &lt; -10</span></code></pre>
+</li>
+<li><code>string</code> <code>:</code> <code>query</code>  <br/>
+check the value&#39;s <code>subkey</code> with the <code>query</code>.
+<a href="#subkeys--dot-notation">Read about subkeys</a>.<pre class="highlighted"><code class="javascript">[ <span class="string">'foo'</span> : <span class="string">'bar'</span> ] <span class="comment">// check if value.foo == 'bar'</span></code></pre>
+</li>
+<li><code>&#39;.subkey1.subkey2&#39;</code> <code>:</code> <code>query</code><br/>
+check the value&#39;s two (and more) <code>subkey</code>s deep with the <code>query</code><pre class="highlighted"><code class="javascript">[ <span class="string">'.foo.bar'</span> : <span class="string">'baz'</span> ] <span class="comment">// check if value.foo.bar == 'baz'</span></code></pre>
+</li>
+<li><code>&#39;@typecast&#39;</code> <code>:</code> <code>query</code><br/>
+get the <code>typecast</code> value and check it against the <code>query</code>. <br/>
+<a href="typecasts.html">Read about typecasts</a>.<pre class="highlighted"><code class="javascript">[ <span class="string">'@time'</span> : [<span class="string">'$gt'</span> : <span class="string">'2013-01-01'</span>] ] <span class="comment">// check if typecast @time is greater than 2013</span></code></pre>
+</li>
+<li><code>&#39;@typecast()&#39;</code> <code>:</code> <code>query</code><br/>
+convert current value using the <code>typecast</code> and check it against the <code>query</code>.<br/>
+<a href="typecasts.html">Read about typecasts</a>.</li>
+<li><code>int</code> <code>:</code> <code>query</code>  <br/>
+Ignore the <code>key</code> and simply check the <code>value</code> with the <code>query</code><br/>
+Note, that when using arrays their keys are <code>int</code>s.<pre class="highlighted"><code class="javascript">[ <span class="string">'foo'</span>, <span class="string">'bar'</span>, <span class="string">'$~ foo.*bar'</span> ] <span class="comment">// match 'foo', 'bar' or shorthand regexp</span></code></pre>
+</li>
+<li><code>&#39;$ shorthand&#39;</code> <code>:</code> <code>query</code> <br/>
+Evaluate <a href="#shorthand-syntax">shorthand syntax</a> and check it with the <code>query</code><pre class="highlighted"><code class="javascript">[ <span class="string">'$ + 1'</span> : <span class="number">2</span> ] <span class="comment">// check if current value + 1 equals 2</span></code></pre>
+</li>
+</ul>
+<a name="and-or-modes" class="anchor" target="#and-or-modes"></a><h2>AND/OR modes</h2>
+<p>By default, every rule in a query should match. This is the <code>AND</code> mode. Queries that match a simple
+scalar will default to <code>OR</code>.</p>
+<p>The mode is <strong>not</strong> carried over to subqueries.</p>
+<p>When calling <code>check</code> you can specify the first level&#39;s mode in $matchAll parameter.</p>
+<p>You can also use &#39;$&#39; key to change the mode, or use <code>$or</code>/<code>$and</code> operators.</p>
+<p>Consider these examples</p>
+<pre class="highlighted"><code class="php"><span class="keyword">AND</span>: [<span class="string">'$regex'</span> =&gt; <span class="string">'foo'</span>, <span class="string">'$not'</span> =&gt; <span class="string">'foobar'</span>]
+<span class="keyword">OR</span>:  [<span class="string">'foo'</span>, <span class="string">'bar'</span>] <span class="comment">// because it's an array of scalars</span>
+<span class="keyword">OR</span>:  [<span class="string">'foo'</span>, <span class="string">'$regex'</span> =&gt; <span class="string">'bar'</span>] <span class="comment">// because element with index 0 is a scalar</span>
+<span class="keyword">OR</span>:  [<span class="string">'</span> =&gt; <span class="string">'OR'</span>, <span class="string">'$regex'</span> =&gt; <span class="string">'foo'</span>, <span class="string">'$not'</span> =&gt; <span class="string">'foobar'</span>] <span class="comment">// because of '=&gt;'OR'</span>
+<span class="keyword">OR</span>:  [<span class="string">'$or'</span> =&gt; [<span class="string">'$regex'</span> =&gt; <span class="string">'foo'</span>, <span class="string">'$not'</span> =&gt; <span class="string">'foobar'</span>]] <span class="comment">// because of $or</span></code></pre>
+<a name="subkeys--dot-notation" class="anchor" target="#subkeys--dot-notation"></a><h2>Subkeys, dot notation</h2>
+<p>Subkey can be:</p>
+<ul>
+<li>array&#39;s key </li>
+<li>object&#39;s property</li>
+<li>object&#39;s method when using <code>()</code> brackets <br/>
+<code>Chequer::checkValue(new SplFileInfo(), [&#39;getSize()&#39; =&gt; [&#39;$gt&#39; =&gt; 0]])</code></li>
+</ul>
+<p>You can access multiple subkeys at once by using the <code>dot notation</code>. You have to start with a <code>.</code> (dot)
+and join subkeys with a dot like this: <code>.subkey.method().another_one</code>. To reference the value itself,
+use the <code>.</code> itself. <br/>
+If you have a subkey with a dot, use standard notation without the <code>.</code> prefix, like this: <code>subkey.with.a.dot</code>.</p>
+<p>If the subkey does not exist in the value, and the value is an 0-indexed array, Chequer will traverse this
+array in search for the first array/object having this key. You can control this behaviour by using
+<code>setDeepArrays()</code>. Note, that two different queries may match in two different subitems.</p>
+<p>Like here:</p>
+<pre class="highlighted"><code class="php">Chequer::checkValue([
+    <span class="string">'foo'</span> =&gt; <span class="string">'bar'</span>, 
+    [<span class="string">'some'</span> =&gt; <span class="string">'thing'</span>],
+    [<span class="string">'hello'</span> =&gt; <span class="string">'world'</span>],
+    [<span class="string">'hello'</span> =&gt; <span class="string">'bye'</span>]
+], [<span class="string">'foo'</span> =&gt; <span class="keyword">true</span>, <span class="string">'some'</span> =&gt; <span class="keyword">true</span>, <span class="string">'hello'</span> =&gt; <span class="keyword">true</span>]);</code></pre>
+<p>We are looking for &#39;foo&#39;, &#39;some&#39; and &#39;hello&#39; keys, but the &#39;hello&#39; and &#39;some&#39; are defined inside the subitems. 
+However, they <em>will</em> be discovered, because the array has continuous keys starting from 0. </p>
+<p>Note however, that <code>[&#39;hello&#39; =&gt; &#39;bye&#39;]</code> will not match, because the first element takes the precedence.</p>
+<a name="shorthand-syntax" class="anchor" target="#shorthand-syntax"></a><h1>Shorthand syntax</h1>
+<p>Shorthand syntax is all about doing wild stuff on values, and returning the result of the operation.</p>
+<p>This shorthand</p>
+<pre class="highlighted"><code class="php">Chequer::checkValue(<span class="string">'foo.txt'</span>, <span class="string">'$ @file().mtime &gt; -1 day'</span>);</code></pre>
+<p>is equivalent to this key:rule:</p>
+<pre class="highlighted"><code class="php">Chequer::checkValue(<span class="string">'foo.txt'</span>, [<span class="string">'@file().mtime'</span> =&gt; [<span class="string">'$gt'</span> =&gt; <span class="string">'-1 day'</span>]]);</code></pre>
+<p>But this:</p>
+<pre class="highlighted"><code class="php"><span class="comment">// check if 'foo.txt' was modified around a week ago</span>
+Chequer::checkValue(<span class="string">'foo.txt'</span>, <span class="string">'$ $abs(@time.now - 1 week - @file().mtime) &lt; 1 day'</span>);</code></pre>
+<p>is doable in key:rule, but rather not very beatyfull.</p>
+<p>Note, that you can disable this syntax by using setShorthandSyntax(). This way, you will not have to
+worry about strings starting with <code>$</code>.</p>
+<a name="dollar" class="anchor" target="#dollar"></a><h3>Dollar</h3>
+<p>Every shorthand should start with a dollar sign <code>$</code>. If first element is an operator, you can
+  use it immediately. Otherwise you have to put a space:</p>
+<pre class="highlighted"><code class="php">  <span class="string">'$gt 10'</span> <span class="comment">// ok!</span>
+  <span class="string">'0.7937140171416104gt; 10'</span> <span class="comment">// ok!</span>
+  <span class="string">'$ .subkey &gt; 20'</span> <span class="comment">// ok!</span>
+  <span class="string">'$ $gt 10'</span> <span class="comment">// ok!</span>
+  <span class="string">'$ 1 + 1 = 2'</span> <span class="comment">// ok!</span>
+  <span class="string">'&gt; 10'</span> <span class="comment">// NOT ok!</span>
+  <span class="string">'$.key'</span> <span class="comment">// NOT ok!</span></code></pre>
+<a name="escaping" class="anchor" target="#escaping"></a><h3>Escaping</h3>
+<p>To not use the shorthand, escape the first dollar with backslash <code>\</code>. <code>&#39;\\$tring!&#39;</code></p>
+<a name="grouping" class="anchor" target="#grouping"></a><h3>Grouping</h3>
+<ul>
+<li><p>You can group operators and values with round brackets <code>()</code>.</p>
+<p>To make queries more readable, and to be sure that everything works as you want, you should use
+them a lot :)</p>
+</li>
+</ul>
+<a name="operator-precedence--lack-of-" class="anchor" target="#operator-precedence--lack-of-"></a><h3>Operator precedence (lack of)</h3>
+<p>There is <strong>no operator precedence</strong>. Query is evaluated from <em>left</em> to <em>right</em>.</p>
+<p>This is <strong>extremely important</strong> as every operation is done through operators. Including AND/OR constructs!<br/>
+<code>$ 1 = 1 &amp;&amp; 2 = 2</code> will evaluate like <code>$ ((1 = 1) &amp;&amp; 2) = 2</code><br/>
+What you would want is rather this: <code>$ (1 = 1) &amp;&amp; (2 = 2)</code>.</p>
+<a name="quoting" class="anchor" target="#quoting"></a><h3>Quoting</h3>
+<p>You can <strong>quote</strong> the strings with either single or double quotes. You can escape the quotes
+by using backslash <code>\</code>. Both are valid: <code>&#39;this &quot;is&quot; ok&#39; &quot;this &#39;is&#39; ok two!&quot;</code>.</p>
+<p>There are no special characters - <code>\n</code> will become a <code>n</code>.</p>
+<a name="numbers" class="anchor" target="#numbers"></a><h3>Numbers</h3>
+<p>Floating point numbers less than 1 should be prefixed with <code>0</code>. This is ok: <code>$&lt; 0.1</code>, 
+this is <strong>not</strong>: <code>$&lt; .1</code>. Moreover, the second example will work, because you will fetch a second
+digit from the number (equivalent to <code>$value[1]</code>).</p>
+<a name="context-value" class="anchor" target="#context-value"></a><h3>Context value</h3>
+<p>To use current context <code>value</code> use single dot <code>.</code>. To access the subkeys use the <a href="#subkeys--dot-notation">dot notation</a>.
+  You can also use dot notation on group results in brackets.</p>
+<pre class="highlighted"><code class="php">  <span class="string">'$ .'</span> = value
+  <span class="string">'$ .key.subkey'</span> = value[<span class="string">'key'</span>][<span class="string">'subkey'</span>]
+  <span class="string">'$ .method().key'</span> = calls value.method()[<span class="string">'key'</span>]
+  <span class="string">'$ (one:1, two:2).two'</span> = [<span class="string">'one'</span> =&gt; <span class="number">1</span>, <span class="string">'two'</span> =&gt; <span class="number">2</span>][<span class="string">'two'</span>]</code></pre>
+<a name="context-switching" class="anchor" target="#context-switching"></a><h3>Context switching</h3>
+<p>To switch the <code>context value</code> you can use the <code>=&gt; ()</code> operator. Everything inside brackets will refer to
+the new value when using dot notation.</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ foo =&gt; ( . = foo )'</span> - uses <span class="string">"foo"</span> <span class="keyword">as</span> a <span class="keyword">new</span> context, so . = <span class="string">"foo"</span> is <span class="keyword">true</span> 
+<span class="string">'$ (one:1, two:2) =&gt; ( .two )'</span> - passes <span class="keyword">array</span> <span class="keyword">as</span> the <span class="keyword">new</span> context, so the result is <span class="number">2</span>
+<span class="string">'$ @time() =&gt; ((.year = 2013) &amp;&amp; (.month = 10))'</span> - passes the @time() object - you don<span class="string">'t have to cast it twice!</code></pre>
+<a name="strings" class="anchor" target="#strings"></a><h3>Strings</h3>
+<p>The strings can be unquoted if they don&#39;t contain any special characters. 
+These words will be converted into their respectable types:</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ 123'</span> = <span class="number">123</span>;
+<span class="string">'$ 0.123'</span> = <span class="number">0.123</span>;
+<span class="string">'$ TRUE'</span> = <span class="keyword">true</span>;
+<span class="string">'$ FALSE'</span> = <span class="keyword">false</span>;
+<span class="string">'$ NULL'</span> = <span class="keyword">null</span>;</code></pre>
+<a name="whitespace" class="anchor" target="#whitespace"></a><h3>Whitespace</h3>
+<p>Whitespace between values is preserved. It&#39;s ignored before first value, after last one
+and <em>before</em> quoted strings.</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ some text'</span> = <span class="string">'some text'</span>
+<span class="string">'$ some text  +  more text'</span> = <span class="string">'some textmore text'</span>
+<span class="string">'$ some .subkey text'</span> = <span class="string">'some SUBKEY text'</span>
+<span class="string">'$ some.subkey text'</span> = <span class="string">'someSUBKEY text'</span>
+<span class="string">'$ some(.subkey) text'</span> = <span class="string">'someSUBKEY text'</span>
+<span class="string">'$ "some" .subkey text'</span> = <span class="string">'some SUBKEY text'</span>
+<span class="string">'$ some( .subkey) "te""xt"'</span> = <span class="string">'someSUBKEYtext'</span>
+<span class="string">'$ 1 "+" 1 + "=" 2'</span> = <span class="string">'1+ 1= 2'</span></code></pre>
+<p>You generally should separate operators and values with a whitespace. At least for readability sake.
+If not, remember to always separate operators themselves.</p>
+<pre class="highlighted"><code class="php"><span class="string">'1+1=2'</span> <span class="comment">// is ok</span>
+<span class="string">'1-0.5=0.5'</span> <span class="comment">// is ok</span>
+<span class="string">'1+-0.5=1.5'</span> <span class="comment">// is NOT ok! +- will be treated as one operator</span>
+<span class="string">'1+ -0.5=1.5'</span> <span class="comment">// this IS ok</span></code></pre>
+<a name="concatenation" class="anchor" target="#concatenation"></a><h3>Concatenation</h3>
+<p>Concatenation of types different then strings is undefined. Currently
+numbers will be treated as strings, FALSE is not represented, TRUE is 1 and
+arrays are changed to &#39;(Array)&#39;. This may change, so don&#39;t rely on it</p>
+<pre class="highlighted"><code class="php"><span class="string">'$    array is (1,2,3) numbers are 1 2 3 false is FALSE true is TRUE null is NULL'</span> 
+ = <span class="string">'array is (Array) numbers are 1 2 3 false is  true is  null is '</span></code></pre>
+<a name="arrays" class="anchor" target="#arrays"></a><h3>Arrays</h3>
+<p>If two values follow each other with a comma <code>,</code>, they will be put into an array:</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ 1, 2'</span> = [<span class="number">1</span>, <span class="number">2</span>]
+<span class="string">'$ (,)'</span> = []
+<span class="string">'$ one, two, three four'</span> = [<span class="string">'one'</span>, <span class="string">'two'</span>, <span class="string">'three four'</span>]
+<span class="string">'$ one, two, (three, four)'</span> = [<span class="string">'one'</span>, <span class="string">'two'</span>, [<span class="string">'three'</span>, <span class="string">'four'</span>]]</code></pre>
+<a name="hashmaps" class="anchor" target="#hashmaps"></a><h3>Hashmaps</h3>
+<p>If value is immediately followed by a colon <code>:</code>, the next value will be put under that key in a hashmap.</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ 1, two:2'</span> = [<span class="string">'1'</span>, <span class="string">'two'</span> =&gt; <span class="number">2</span>]
+<span class="string">'$ (@time.year):"Now!"'</span> = [<span class="number">2013</span> =&gt; <span class="string">'Now!'</span>]
+<span class="string">'$ (year @time.year):"Now!"'</span> = [<span class="string">'year 2013'</span> =&gt; <span class="string">'Now!'</span>]</code></pre>
+<a name="method-calls" class="anchor" target="#method-calls"></a><h3>Method calls</h3>
+<p>When calling mathods and typecasts you can follow exactly the same syntax. Remember to put brackets
+directly after an identifier - without any whitespace! </p>
+<pre class="highlighted"><code class="php"><span class="string">'$ .myMethod()'</span> - calls myMethod()
+<span class="string">'$ .myMethod(1, 2, 3)'</span> - calls myMethod(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)
+<span class="string">'$ .myMethod((1, 2, 3), 4)'</span> - calls myMethod([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>], <span class="number">4</span>)
+<span class="string">'$ @typecast()'</span> - calls typecast([value])
+<span class="string">'$ @typecast(1, 2, 3)'</span> - calls typecast([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+<span class="string">'$ @typecast(., 1, 2, 3)'</span> - calls typecast([value, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])
+<span class="string">'$ .subkey@typecast()'</span> - calls typecast([value[<span class="string">'subkey'</span>]])
+<span class="string">'$ .subkey@typecast(.)'</span> - calls typecast([value])
+<span class="string">'$ @typecast(.subkey)'</span> - calls typecast([value[<span class="string">'subkey'</span>]])
+<span class="string">'$ @typecast'</span> - calls typecast()</code></pre>
+<a name="conditional-queries" class="anchor" target="#conditional-queries"></a><h3>Conditional queries</h3>
+<p>For conditional queries you can use conditional operator, a.k.a ternary operator <code>? :</code>.</p>
+<p>Current implementation doesn&#39;t understand multiple conditionals, so you have to group them with
+brackets. Also, if you want to use arrays inside conditionals, you should put them in brackets too.</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ (. &gt; 1 ? (. &gt; 2 ? C : B) : A)'</span> = <span class="string">'A'</span> <span class="keyword">for</span> value <span class="number">1</span>
+<span class="string">'$ (. &gt; 1 ? (. &gt; 2 ? C : B) : A)'</span> = <span class="string">'B'</span> <span class="keyword">for</span> value <span class="number">2</span>
+
+<span class="comment">// it is possible to use arrays in conditional, and even use conditionals for keys!</span>
+<span class="string">'$ . &gt; 1 ? (1, 2, 3) : FALSE, (. &gt; 1 ? B:A) : (.&gt; 1 ? 2:1)'</span>,</code></pre>
+<a name="general-logic" class="anchor" target="#general-logic"></a><h3>General logic</h3>
+<p>The logic behind it, is to collect a <code>value</code>, an <code>operator</code> and the <code>parameter</code>.
+Afterwards call the <code>operator</code><strong>(</strong> <code>value</code>, <code>parameter</code> <strong>)</strong> and use it&#39;s result as the <code>value</code> of the next <code>operator</code>.</p>
+<ul>
+<li>Every query is run under a <code>context</code> - which is a <code>value</code> you are querying. The <code>context</code> stays the same
+for the whole query, so no matter how deep you are, <code>.</code> will give you the <code>context</code>.</li>
+<li>You can skip the <code>value</code> at the beginning of the query, group or array index. <code>context</code> will be used as <code>value</code>.</li>
+</ul>
+<p><code>$&lt; 10</code> is thus equivalent to <code>$ . &lt; 10</code>.<br/>
+<code>$ .method( &lt; 10, &gt; 10)</code> is the same as <code>$ .method( . &lt; 10, . &gt; 10)</code>
+<em> You can skip the <code>operator</code> - the collected <code>value</code> will be the result.
+</em> If there is no <code>parameter</code> but another <code>operator</code> follows, it&#39;s result will be used as the <code>parameter</code>:</p>
+<p><code>&#39;$ $not $regex foo&#39;</code> will first evaluate <code>&#39;$regex foo&#39;</code> and using it&#39;s result - <code>&#39;$not&#39;</code>.</p>
+<p>Combining all this you can write <code>$= 10 || (= 20) || (! ~ &quot;/\d/&quot;)</code> which is equivalent 
+to <code>$ (. = 10) || (. = 10) || (!(~ &quot;/\d/&quot;))</code>.</p>
+<p>Note, that if both <code>value</code> and <code>parameter</code> are present, they both will be evaluated before passing
+them to the operator. This means that in this statement: <code>$ 1 = 2 &amp;&amp; 2 = 3 &amp;&amp; 3 = 4</code> first <em>TWO</em>
+statements will evaluated, and just the third will be skipped.</p>
+<a name="missing-values" class="anchor" target="#missing-values"></a><h3>Missing values</h3>
+<p>If the value you are trying to access is missing, it will return null. It holds true even if
+you are trying to access a deep subkey! You can set strict mode to TRUE to throw exceptions instead.</p>
+<a name="execution-breaks" class="anchor" target="#execution-breaks"></a><h3>Execution breaks</h3>
+<p>Operators may throw <code>\Chequer\BreakException</code> - this will exit current level with a return value
+set in the exception. This way <code>$or</code> and <code>$and</code> are made not greedy.</p>
+
+                <footer>
+                    <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
+                        Mustard - a readable dark theme for web developers!
+                    </a></p>
+                    <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
+<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+ -->                </footer>
+            </div>
+        </div>
+    
+    </div><!-- /container -->
+
+    <!-- Scripts -->
+    
+    
+    
+    
+    
+    <script >(function(){
+	// Did we just livereload?
+var log = true && localStorage && console && console.log && true;
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReloaded at', new Date())
+}
+
+// Listen for the regenerated event
+// and perform a reload of the page when the event occurs
+var listen = function(){
+	var socket = io.connect('/docpad-livereload');
+	socket.on('regenerated',function(){
+		if ( log ) {
+	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+}
+document.location.reload();
+	});
+};
+	if ( typeof io !== 'undefined' ) {
+		listen();
+	} else {
+		// Inject socket.io into our page then listen once loaded
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = true;
+	t.src = '/socket.io/socket.io.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t,s);
+};
+		inject();
+	}
+})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+</body>
+</html>

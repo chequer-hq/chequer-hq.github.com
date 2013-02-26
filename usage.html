@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
+
+    <!-- Our site title and description -->
+    <title>Usage | Chequer filtering library</title>
+    <meta name="description" content="The Sparkling New Language For Checking Things In A Sane Way.
+Match scalars, arrays, objects and grumpy cats against the query of Your choice!" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Rafal Lindemann" />
+
+    <!-- Output DocPad produced meta elements -->
+    <meta http-equiv="X-Powered-By" content="DocPad"/>
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+    <!-- Shims: IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles -->
+    
+    
+    
+    
+    
+    
+    <link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap.css" /><link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap-responsive.css" /><link  rel="stylesheet" href="/vendor/highlightjs-mustard.css" /><link  rel="stylesheet" href="/styles/style.css" /><link  rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css" /><link  rel="stylesheet" href="http://fonts.googleapis.com/css?family=Domine|Open+Sans|Droid+Sans|Roboto+Condensed|Roboto|Droid+Sans+Mono|Six+Caps|Oswald:400,300" />
+</head>
+<body>
+    <!-- Markup -->
+    <!--
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Welcome</a>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="container stickem-container" id="site">
+        <div class="row">
+        
+            <div id="left" class="">
+                <div class="span3 content">
+                    <div id="menu" class="stickem span3">
+                        <a href="/"><img src="/img/logo.png" id="logo" /></a>
+                        <span class="visible-phone">
+                            <div class="btn-group toc-button">
+                              <a class="btn dropdown-toggle" href="#" onclick="return false;">
+                                  <select class="toc-selector visible-phone"><option>-- select topic --</option></select>
+                                Menu
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                              </ul>
+                            </div>
+                        </span>
+                        <div class="nav hidden-phone">
+                            <ul class="main">
+                                
+                                    <li about="/index.html" class="">
+                                        <a href="/index.html" >About</a>
+                                    </li>
+                                
+                                    <li about="/install.html" class="">
+                                        <a href="/install.html" >Install</a>
+                                    </li>
+                                
+                                    <li about="/usage.html" class="active">
+                                        <a href="/usage.html" >Usage</a>
+                                    </li>
+                                
+                                    <li about="/language.html" class="">
+                                        <a href="/language.html" >Language</a>
+                                    </li>
+                                
+                                    <li about="/operators.html" class="">
+                                        <a href="/operators.html" >Operators</a>
+                                    </li>
+                                
+                                    <li about="/typecasts.html" class="">
+                                        <a href="/typecasts.html" >Typecasts</a>
+                                    </li>
+                                
+                            </ul>
+
+                            <ul class="toc "></ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+            <div class="span9 offset3" id="main">
+                <a name="usage" class="anchor" target="#usage"></a><h1>Usage</h1>
+<p>There are a couple of usage patterns to choose from.</p>
+<a name="simple-checks" class="anchor" target="#simple-checks"></a><h2>Simple checks</h2>
+<p>For simple checks use static function <code>checkValue()</code></p>
+<pre class="highlighted"><code class="php"><span class="keyword">if</span> (Cheque::checkValue(<span class="variable">$value</span>, <span class="variable">$query</span>)) {}</code></pre>
+<a name="reusing-the-query" class="anchor" target="#reusing-the-query"></a><h2>Reusing the query</h2>
+<p>When you want to reuse your query, or pass it somewhere as a callback, create the object and call <code>check</code> method,
+or invoke the object.</p>
+<pre class="highlighted"><code class="php"><span class="comment">// build the query object</span>
+<span class="variable">$chequer</span> = <span class="keyword">new</span> Chequer(<span class="variable">$query</span>);
+
+<span class="comment">// use it witch check()</span>
+<span class="keyword">if</span> (<span class="variable">$chequer</span>-&gt;check(<span class="variable">$value</span>)) {}
+
+<span class="comment">// or invoke it as a function</span>
+<span class="keyword">if</span> (<span class="variable">$chequer</span>(<span class="variable">$value</span>)) {}
+
+<span class="comment">// or pass it as a callback</span>
+array_filter(<span class="variable">$array</span>, <span class="variable">$chequer</span>);</code></pre>
+<a name="global-configuration" class="anchor" target="#global-configuration"></a><h2>Global configuration</h2>
+<p>You can store all your queries in configuration files and use them when they are needed. This way you can separate
+your validation/filtering logic from your code - just like you do with the templates!</p>
+<pre class="highlighted"><code class="php"><span class="comment">// load the rules from the JSON file</span>
+Chequer::addGlobalRules(json_decode(file_get_contents(<span class="string">'queries.json'</span>), JSON_OBJECT_AS_ARRAY));
+
+<span class="comment">// reuse them</span>
+<span class="keyword">if</span> (Chequer::checkValue(<span class="variable">$value</span>, [<span class="string">'$rule'</span> =&gt; <span class="string">'some_defined_rule'</span>])) {}</code></pre>
+<p>As every <code>query</code> is a <code>scalar</code> or an <code>array</code> - they can be easely stored in JSON, YAML, MongoDB - you name it.</p>
+<a name="dependency-injection" class="anchor" target="#dependency-injection"></a><h2>Dependency injection</h2>
+<p>If you rather prefer DI - fret not. You can add rules to <code>Chequer</code> objects directly, which means you can
+make a factory, or pass the <code>Chequer</code> object around and still populate it with predefined rules.</p>
+<p>The above example rewritten as Silex factory:</p>
+<pre class="highlighted"><code class="php"><span class="comment">// load the queries once</span>
+<span class="variable">$app</span>[<span class="string">'chequer.rules'</span>] = <span class="variable">$app</span>-&gt;share(function() {
+        <span class="keyword">return</span> json_decode(file_get_contents(<span class="string">'queries.json'</span>), JSON_OBJECT_AS_ARRAY);
+    });
+<span class="comment">// always have a fresh chequer on hand</span>
+<span class="variable">$app</span>[<span class="string">'chequer'</span>] = function() <span class="keyword">use</span> (<span class="variable">$app</span>) { 
+    <span class="keyword">return</span> (<span class="keyword">new</span> Chequer())-&gt;addRules(<span class="variable">$app</span>[<span class="string">'chequer.rules'</span>]);
+};
+
+<span class="comment">// reuse</span>
+<span class="keyword">if</span> (<span class="variable">$app</span>[<span class="string">'chequer'</span>]-&gt;query(<span class="variable">$value</span>, [<span class="string">'$rule'</span> =&gt; <span class="string">'some_defined_rule'</span>])) {}</code></pre>
+<hr>
+<a name="extending" class="anchor" target="#extending"></a><h1>Extending</h1>
+<p>In case you want to add your own built-in operators, or typecasts you can 
+extend the Chequer class and define protected function with the name operator<em>* and typecast</em>*.</p>
+<p>To define the <code>$true</code> operator:</p>
+<pre class="highlighted"><code class="php"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">operator_true</span><span class="params">(<span class="variable">$value</span>, <span class="variable">$rule</span>)</span> {</span>
+    <span class="keyword">return</span> <span class="variable">$rule</span> == <span class="keyword">true</span>;
+}</code></pre>
+<p>Or you can add the operator/alias to the <code>$operators</code> protected parameter.</p>
+<hr>
+<a name="examples" class="anchor" target="#examples"></a><h1>Examples</h1>
+<a name="array-filtering" class="anchor" target="#array-filtering"></a><h2>Array filtering</h2>
+<p>This will leave only values from 2 to 5 in the array.</p>
+<pre class="highlighted"><code class="php"><span class="variable">$array</span> = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>];
+<span class="variable">$array</span> = array_filter(<span class="variable">$array</span>, <span class="keyword">new</span> Chequer([<span class="string">'$between'</span> =&gt; [<span class="number">2</span>, <span class="number">5</span>]]))</code></pre>
+<a name="iterator-filtering" class="anchor" target="#iterator-filtering"></a><h2>Iterator filtering</h2>
+<p>This will iterate through files with &#39;php&#39; or &#39;html&#39; extensions, that are older than one day.</p>
+<pre class="highlighted"><code class="php"><span class="variable">$files</span> = <span class="keyword">new</span> FilesystemIterator(dirname(__DIR__));
+<span class="variable">$files</span> = <span class="keyword">new</span> CallbackFilterIterator(<span class="variable">$files</span>, 
+             <span class="keyword">new</span> Chequer(<span class="string">'$ @file() =&gt; (.extension $in(php, html) &amp;&amp; (.mtime &lt; -1 day))'</span>)
+         );
+<span class="keyword">foreach</span>(<span class="variable">$files</span> <span class="keyword">as</span> <span class="variable">$file</span>) {}</code></pre>
+<a name="data-querying" class="anchor" target="#data-querying"></a><h2>Data querying</h2>
+<p>You can even read and translate the data... This will ouput information about biggest countries
+with the highest GDP, and transpose it to another format:</p>
+<pre class="highlighted"><code class="php"><span class="comment">// data for 10 most populated countries on earth</span>
+<span class="variable">$populatedCountries</span> = <span class="string">'[{"gdp":7973000,"name":"China","pop":1330044000},{"gdp":3297000,"name":"India","pop":1173108018},{"gdp":14260000,"name":"United States","pop":310232863},{"gdp":914600,"name":"Indonesia","pop":242968342},{"gdp":1993000,"name":"Brazil","pop":201103330},{"gdp":427300,"name":"Pakistan","pop":184404791},{"gdp":224000,"name":"Bangladesh","pop":156118464},{"gdp":335400,"name":"Nigeria","pop":154000000},{"gdp":2266000,"name":"Russia","pop":140702000},{"gdp":4329000,"name":"Japan","pop":127288000}]'</span>;
+<span class="variable">$populatedCountries</span> = json_decode(<span class="variable">$populatedCountries</span>, JSON_OBJECT_AS_ARRAY);
+
+<span class="keyword">echo</span> implode(<span class="string">"\n"</span>, 
+    <span class="comment">// If gdp is more then 5mln return "#### with #### of GDP". Otherwise return NULL which is filtered out.    </span>
+    Chequer::shorthand(<span class="string">'(.gdp &gt; 5000000) ? (.name with .gdp of GDP) : NULL'</span>)
+        -&gt;walk(<span class="variable">$populatedCountries</span>)
+);
+<span class="comment">/* This will output:
+   China with 7973000 of GDP
+   United States with 14260000 of GDP
+*/</span>
+
+<span class="variable">$newFormat</span> = json_encode( 
+    <span class="comment">// If gdp is more then 5mln add {### : {gdp : ###, pop : ###}} to the results</span>
+    Chequer::shorthand(<span class="string">'(.gdp &gt; 5000000) ? (.name : (gdp:.gdp, pop:.pop)) : NULL'</span>)
+        -&gt;merge(<span class="variable">$populatedCountries</span>)
+);
+<span class="comment">/** New format will be:
+    {"China":{"gdp":7973000,"pop":1330044000},"United States":{"gdp":14260000,"pop":310232863}}
+*/</span></code></pre>
+<a name="environment-variables-checking" class="anchor" target="#environment-variables-checking"></a><h2>Environment variables checking</h2>
+<p>This example will match all users from <em>localhost</em>, plus those with IP starting from <em>&#39;192&#39;</em> and having a <em>&#39;debug&#39;</em> cookie.</p>
+<p>Btw., the <code>checkEnvironment</code> function is a neat shortcut for checking _SERVER, _ENV, _COOKIES etc. in one go.</p>
+<pre class="highlighted"><code class="php"><span class="keyword">if</span> (Chequer::checkEnvironment([
+    [<span class="string">'REMOTE_ADDR'</span> =&gt; [<span class="string">'127.0.0.1'</span>, <span class="string">'localhost'</span>]],
+    [<span class="string">'REMOTE_ADDR'</span> =&gt; [<span class="string">'$regex'</span> =&gt; <span class="string">'/^192\./'</span>], <span class="string">'_COOKIE'</span> =&gt; [<span class="string">'debug'</span> =&gt; <span class="keyword">true</span>]]
+], <span class="keyword">false</span>)) {
+    <span class="keyword">echo</span> <span class="string">'Debug!'</span>;
+}</code></pre>
+
+                <footer>
+                    <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
+                        Mustard - a readable dark theme for web developers!
+                    </a></p>
+                    <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
+<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+ -->                </footer>
+            </div>
+        </div>
+    
+    </div><!-- /container -->
+
+    <!-- Scripts -->
+    
+    
+    
+    
+    
+    <script >(function(){
+	// Did we just livereload?
+var log = true && localStorage && console && console.log && true;
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReloaded at', new Date())
+}
+
+// Listen for the regenerated event
+// and perform a reload of the page when the event occurs
+var listen = function(){
+	var socket = io.connect('/docpad-livereload');
+	socket.on('regenerated',function(){
+		if ( log ) {
+	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+}
+document.location.reload();
+	});
+};
+	if ( typeof io !== 'undefined' ) {
+		listen();
+	} else {
+		// Inject socket.io into our page then listen once loaded
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = true;
+	t.src = '/socket.io/socket.io.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t,s);
+};
+		inject();
+	}
+})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta -->
+    <meta charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <!-- Use the .htaccess and remove these lines to avoid edge case issues.
+       More info: h5bp.com/i/378 -->
+    <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />-->
+
+    <!-- Our site title and description -->
+    <title>Install | Chequer filtering library</title>
+    <meta name="description" content="The Sparkling New Language For Checking Things In A Sane Way.
+Match scalars, arrays, objects and grumpy cats against the query of Your choice!" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Rafal Lindemann" />
+
+    <!-- Output DocPad produced meta elements -->
+    <meta http-equiv="X-Powered-By" content="DocPad"/>
+
+    <!-- Mobile viewport optimized: h5bp.com/viewport -->
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+
+    <!-- Shims: IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script async src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Styles -->
+    
+    
+    
+    
+    
+    
+    <link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap.css" /><link  rel="stylesheet" href="/vendor/twitter-bootstrap/css/bootstrap-responsive.css" /><link  rel="stylesheet" href="/vendor/highlightjs-mustard.css" /><link  rel="stylesheet" href="/styles/style.css" /><link  rel="stylesheet" href="/vendor/fontawesome/css/font-awesome.min.css" /><link  rel="stylesheet" href="http://fonts.googleapis.com/css?family=Domine|Open+Sans|Droid+Sans|Roboto+Condensed|Roboto|Droid+Sans+Mono|Six+Caps|Oswald:400,300" />
+</head>
+<body>
+    <!-- Markup -->
+    <!--
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">Welcome</a>
+            </div>
+        </div>
+    </div>
+    -->
+
+    <div class="container stickem-container" id="site">
+        <div class="row">
+        
+            <div id="left" class="">
+                <div class="span3 content">
+                    <div id="menu" class="stickem span3">
+                        <a href="/"><img src="/img/logo.png" id="logo" /></a>
+                        <span class="visible-phone">
+                            <div class="btn-group toc-button">
+                              <a class="btn dropdown-toggle" href="#" onclick="return false;">
+                                  <select class="toc-selector visible-phone"><option>-- select topic --</option></select>
+                                Menu
+                                <span class="caret"></span>
+                              </a>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                              </ul>
+                            </div>
+                        </span>
+                        <div class="nav hidden-phone">
+                            <ul class="main">
+                                
+                                    <li about="/index.html" class="">
+                                        <a href="/index.html" >About</a>
+                                    </li>
+                                
+                                    <li about="/install.html" class="active">
+                                        <a href="/install.html" >Install</a>
+                                    </li>
+                                
+                                    <li about="/usage.html" class="">
+                                        <a href="/usage.html" >Usage</a>
+                                    </li>
+                                
+                                    <li about="/language.html" class="">
+                                        <a href="/language.html" >Language</a>
+                                    </li>
+                                
+                                    <li about="/operators.html" class="">
+                                        <a href="/operators.html" >Operators</a>
+                                    </li>
+                                
+                                    <li about="/typecasts.html" class="">
+                                        <a href="/typecasts.html" >Typecasts</a>
+                                    </li>
+                                
+                            </ul>
+
+                            <ul class="toc "></ul>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            
+            <div class="span9 offset3" id="main">
+                <a name="install" class="anchor" target="#install"></a><h1>Install</h1>
+<p>Chequer is a Domain Specific Language and a set of functions to allow You to use it. 
+It is host-agnostic by design, which makes it easely portable to different languages. Currently
+only PHP is available, with JavaScript port soon to follow.</p>
+<p>Spread the word and help it grow!</p>
+<a name="php" class="anchor" target="#php"></a><h2>PHP</h2>
+<p>Use <a href="http://getcomposer.org/">Composer</a> package <code>stamina/chequer-php</code> to install.</p>
+<pre class="highlighted"><code class="nginx"><span class="title">php</span> composer.phar require stamina/chequer-php</code></pre>
+<p>The minimum required PHP version is 5.3. Because 5.4 introduces the shorthand array syntax - this version is recommended
+and used in this documentation.</p>
+<p>In a more traditional manner, you can add the Chequer library to you include path, or auto loader, as it is
+PSR-0 compliant. You can also use a single file <code>Chequer.php</code>, as long as you refrain from using typecasts.</p>
+<div class="well text-center">
+    <a href="https://github.com/panrafal/chequer-php" class="btn btn-primary"><i class="icon-github"></i> View on GitHub</a>
+    <a href="https://github.com/panrafal/chequer-php/archive/master.zip" class="btn"><i class="icon-download-alt"></i> Download ZIP</a>
+    <p>
+        <a href="https://travis-ci.org/panrafal/chequer-php"><img src="https://travis-ci.org/panrafal/chequer-php.png?branch=master" alt="Build Status"></a>
+    </p>
+</div>
+                <footer>
+                    <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
+                        Mustard - a readable dark theme for web developers!
+                    </a></p>
+                    <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
+<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+ -->                </footer>
+            </div>
+        </div>
+    
+    </div><!-- /container -->
+
+    <!-- Scripts -->
+    
+    
+    
+    
+    
+    <script >(function(){
+	// Did we just livereload?
+var log = true && localStorage && console && console.log && true;
+if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
+	localStorage.removeItem('/docpad-livereload/reloaded');
+	console.log('LiveReloaded at', new Date())
+}
+
+// Listen for the regenerated event
+// and perform a reload of the page when the event occurs
+var listen = function(){
+	var socket = io.connect('/docpad-livereload');
+	socket.on('regenerated',function(){
+		if ( log ) {
+	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
+}
+document.location.reload();
+	});
+};
+	if ( typeof io !== 'undefined' ) {
+		listen();
+	} else {
+		// Inject socket.io into our page then listen once loaded
+var inject = function(){
+	var t = document.createElement('script');
+	t.type = 'text/javascript';
+	t.async = true;
+	t.src = '/socket.io/socket.io.js';
+	t.onload = listen;
+	var s = document.getElementsByTagName('script')[0];
+	s.parentNode.insertBefore(t,s);
+};
+		inject();
+	}
+})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+</body>
+</html>
