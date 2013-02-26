@@ -23,11 +23,7 @@ Match scalars, arrays, objects and grumpy cats against the query of Your choice!
     <meta name="viewport" content="width=device-width" />
 
     <!-- Icons -->
-    <link rel="shortcut icon" href="ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/img/logo-square.png">
 
     <!-- Shims: IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -211,13 +207,18 @@ with the highest GDP, and transpose it to another format:</p>
 ], <span class="keyword">false</span>)) {
     <span class="keyword">echo</span> <span class="string">'Debug!'</span>;
 }</code></pre>
+<a name="command-line-input" class="anchor" target="#command-line-input"></a><h2>Command line input</h2>
+<p>Shorthand syntax may come in handy in console applications. </p>
+<p>Ductape - a PHP Build tool - accepts Chequer everywhere there is something to filter. For example this command
+will list all the files, including subdirectories, whose size is more than 1MB and they are not archives.</p>
+<pre class="highlighted"><code class="brainfuck"><span class="comment">ductape</span>.<span class="comment">phar</span> <span class="comment">files</span> <span class="literal">-</span><span class="literal">-</span><span class="comment">filter</span> <span class="comment">"$</span> <span class="comment">@file()</span>.<span class="comment">size</span> &gt; <span class="comment">1000000</span> <span class="comment">&amp;&amp;</span> <span class="comment">!</span> <span class="comment">(@file()</span>.<span class="comment">ext</span> <span class="comment">$in</span> <span class="comment">(zip</span>,<span class="comment">rar</span>,<span class="comment">tar</span>,<span class="comment">tgz))"</span> <span class="string">.</span></code></pre>
 
                 <footer>
                     <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
                         Mustard - a readable dark theme for web developers!
                     </a></p>
                     <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
-<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+<!--                     <p>This website was last updated at 2013-02-26T21:39:55.424Z</p>
  -->                </footer>
             </div>
         </div>
@@ -230,40 +231,6 @@ with the highest GDP, and transpose it to another format:</p>
     
     
     
-    <script >(function(){
-	// Did we just livereload?
-var log = true && localStorage && console && console.log && true;
-if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
-	localStorage.removeItem('/docpad-livereload/reloaded');
-	console.log('LiveReloaded at', new Date())
-}
-
-// Listen for the regenerated event
-// and perform a reload of the page when the event occurs
-var listen = function(){
-	var socket = io.connect('/docpad-livereload');
-	socket.on('regenerated',function(){
-		if ( log ) {
-	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
-}
-document.location.reload();
-	});
-};
-	if ( typeof io !== 'undefined' ) {
-		listen();
-	} else {
-		// Inject socket.io into our page then listen once loaded
-var inject = function(){
-	var t = document.createElement('script');
-	t.type = 'text/javascript';
-	t.async = true;
-	t.src = '/socket.io/socket.io.js';
-	t.onload = listen;
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(t,s);
-};
-		inject();
-	}
-})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+    <script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
 </body>
 </html>

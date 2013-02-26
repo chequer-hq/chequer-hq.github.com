@@ -23,11 +23,7 @@ Match scalars, arrays, objects and grumpy cats against the query of Your choice!
     <meta name="viewport" content="width=device-width" />
 
     <!-- Icons -->
-    <link rel="shortcut icon" href="ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="/img/logo-square.png">
 
     <!-- Shims: IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -147,18 +143,18 @@ For example, <code>@time(&quot;-1 week&quot;)</code> will give you <code>Chequer
                    Note the lack of brackets on<span class="phpdoc"> @myFile</span> - we are using myFile's value
                    and then we convert it into a Chequer\File - by using the brackets this time.
                 */</span>
-                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.6706881341524422gt; @file(@myFile).mtime'</span>,
+                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.004265919327735901gt; @file(@myFile).mtime'</span>,
                 <span class="comment">/* This does exactly the same - converts<span class="phpdoc"> @myFile</span> to<span class="phpdoc"> @file</span> */</span>
-                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.6706881341524422gt; @myFile@file().mtime'</span>,
+                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.004265919327735901gt; @myFile@file().mtime'</span>,
                 <span class="comment">/* File should be modified in the current year. 
                    Note the lack of brackets - we are using the current time's value.
                    We also use a shorthand syntax for $cmp.
                 */</span>
                 <span class="string">'.mtime.year'</span> =&gt; <span class="string">'@time.year'</span>,
                 <span class="comment">/* We call the myRandom typecast. The result should be grater than 50 */</span>
-                <span class="string">'@myRandom()'</span> =&gt; <span class="string">'0.6706881341524422gt; 50'</span>
+                <span class="string">'@myRandom()'</span> =&gt; <span class="string">'0.004265919327735901gt; 50'</span>
                 <span class="comment">/* As myFunc is a closure, we can skip the brackets. It will be called nevertheless. */</span>
-                <span class="string">'@myRandom'</span> =&gt; <span class="string">'0.6706881341524422gt; 50'</span>
+                <span class="string">'@myRandom'</span> =&gt; <span class="string">'0.004265919327735901gt; 50'</span>
             ]
         ]);
 
@@ -263,7 +259,7 @@ operator to time.</p>
                         Mustard - a readable dark theme for web developers!
                     </a></p>
                     <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
-<!--                     <p>This website was last updated at 2013-02-26T09:07:36.308Z</p>
+<!--                     <p>This website was last updated at 2013-02-26T21:39:55.424Z</p>
  -->                </footer>
             </div>
         </div>
@@ -276,40 +272,6 @@ operator to time.</p>
     
     
     
-    <script >(function(){
-	// Did we just livereload?
-var log = true && localStorage && console && console.log && true;
-if ( log && localStorage.getItem('/docpad-livereload/reloaded') === 'yes' ) {
-	localStorage.removeItem('/docpad-livereload/reloaded');
-	console.log('LiveReloaded at', new Date())
-}
-
-// Listen for the regenerated event
-// and perform a reload of the page when the event occurs
-var listen = function(){
-	var socket = io.connect('/docpad-livereload');
-	socket.on('regenerated',function(){
-		if ( log ) {
-	localStorage.setItem('/docpad-livereload/reloaded', 'yes');
-}
-document.location.reload();
-	});
-};
-	if ( typeof io !== 'undefined' ) {
-		listen();
-	} else {
-		// Inject socket.io into our page then listen once loaded
-var inject = function(){
-	var t = document.createElement('script');
-	t.type = 'text/javascript';
-	t.async = true;
-	t.src = '/socket.io/socket.io.js';
-	t.onload = listen;
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(t,s);
-};
-		inject();
-	}
-})();</script><script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+    <script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
 </body>
 </html>
