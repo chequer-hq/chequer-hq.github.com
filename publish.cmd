@@ -1,0 +1,1 @@
+docpad generate --env static --out publish

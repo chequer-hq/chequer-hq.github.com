@@ -156,3 +156,15 @@ if (Chequer::checkEnvironment([
     echo 'Debug!';
 }
 ```
+
+Command line input
+------------------
+
+Shorthand syntax may come in handy in console applications. 
+
+Ductape - a PHP Build tool - accepts Chequer everywhere there is something to filter. For example this command
+will list all the files, including subdirectories, whose size is more than 1MB and they are not archives.
+
+```
+ductape.phar files --filter "$ @file().size > 1000000 && ! (@file().ext $in (zip,rar,tar,tgz))" .
+```
