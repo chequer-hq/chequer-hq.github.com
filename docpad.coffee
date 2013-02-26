@@ -16,28 +16,26 @@ docpadConfig = {
 
 			# Here are some old site urls that you would like to redirect from
 			oldUrls: [
-				'www.website.com',
-				'website.herokuapp.com'
 			]
 
 			# The default title of our website
-			title: "Your Website"
+			title: "Chequer filtering library"
 
 			# The website description (for SEO)
 			description: """
-				When your website appears in search results in say Google, the text here will be shown underneath your website's title.
+				The Sparkling New Language For Checking Things In A Sane Way.
+				Match scalars, arrays, objects and grumpy cats against the query of Your choice!
 				"""
 
 			# The website keywords (for SEO) separated by commas
 			keywords: """
-				place, your, website, keywoards, here, keep, them, related, to, the, content, of, your, website
 				"""
 
 			# The website author's name
-			author: "Your Name"
+			author: "Rafal Lindemann"
 
 			# The website author's email
-			email: "your@email.com"
+			#email: "your@email.com"
 
 
 
@@ -87,6 +85,8 @@ docpadConfig = {
 			markedOptions:
 				breaks: false
 				anchors: true
+		cleanurls:
+			enabled: false
 
 	# =================================
 	# DocPad Events

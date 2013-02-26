@@ -5,7 +5,7 @@ layout: default
 pageOrder: 10
 ---
 
-<h1>Install</h1>
+# Install
 
 Chequer is a Domain Specific Language and a set of functions to allow You to use it. 
 It is host-agnostic by design, which makes it easely portable to different languages. Currently

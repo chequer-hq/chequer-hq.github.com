@@ -5,7 +5,7 @@ layout: default
 pageOrder: 20
 ---
 
-<h1>Usage</h1>
+# Usage
 
 There are a couple of usage patterns to choose from.
 

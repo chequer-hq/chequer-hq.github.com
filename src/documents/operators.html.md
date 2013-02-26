@@ -5,7 +5,7 @@ layout: default
 pageOrder: 40
 ---
 
-<h1>Operators</h1>
+# Operators
 
 Operators start with a `$`, accept a `value`, a `parameter` and return the `result`. Some operators
 have short versions (`!`, `+`, `>` ...), but they still have to be used with `$` if outside of the

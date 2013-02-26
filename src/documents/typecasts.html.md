@@ -5,7 +5,7 @@ layout: default
 pageOrder: 45
 ---
 
-<h1>Typecasts</h1>
+# Typecasts
 
 Typecasts are special objects which you can read data from and convert values into. They act like a
 regular subkeys, and can be accessed using dot notation (`@typecast.subkey` or `'.subkey@typecast'`).

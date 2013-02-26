@@ -7,7 +7,16 @@ pageOrder: 30
 
 <h1>Chequer Query Language</h1>
 
-Chequer uses three syntaxes at the same time.
+Chequer uses three syntaxes at the same time. You can mix them together however you please:
+
+```js
+[
+  null,           // value may be null (basic comparison)
+  '$gt' : 20,     // or be bigger than 20 (key:rule)
+  '$~ foo.*bar',  // or match this regular expression (shorthand)
+  ['foo', 'bar'], // or be any of these (key:rule + comparison)
+]
+```
 
 Whenever there is a reference to `query` it may be:
 
@@ -35,15 +44,7 @@ Whenever there is a reference to `query` it may be:
   a complex query in mongodb-like [key:rule syntax][keyrule]<br/>
   great for fast queries, or/and lists, hashmap digging...
 
-You can mix them together however you please:
-```js
-[
-  null,           // value may be null (comparison)
-  '$gt' : 20,     // or be bigger than 20 (key:rule)
-  '$~ foo.*bar',  // or match this regular expression (shorthand)
-  ['foo', 'bar'], // or be any of these (key:rule + comparison)
-]
-```
+
 
 ---------------------------------------------------
 
@@ -100,7 +101,7 @@ Query is a hashmap with any combination of following `key` `:` `rule` pairs:
   ```
 
 
-<h3 id="matchall"> Match All (AND) / Match Any (OR) in complex queries </h3>
+## AND/OR modes
 
 By default, every rule in a query should match. This is the `AND` mode. Queries that match a simple
 scalar will default to `OR`.
@@ -122,7 +123,7 @@ OR:  ['$or' => ['$regex' => 'foo', '$not' => 'foobar']] // because of $or
 ```
 
 
-# Subkeys, dot notation
+## Subkeys, dot notation
 [dotnotation]: #subkeys--dot-notation
 
 Subkey can be:
