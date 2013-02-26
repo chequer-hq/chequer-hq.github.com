@@ -143,18 +143,18 @@ For example, <code>@time(&quot;-1 week&quot;)</code> will give you <code>Chequer
                    Note the lack of brackets on<span class="phpdoc"> @myFile</span> - we are using myFile's value
                    and then we convert it into a Chequer\File - by using the brackets this time.
                 */</span>
-                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.004265919327735901gt; @file(@myFile).mtime'</span>,
+                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.2987782843410969gt; @file(@myFile).mtime'</span>,
                 <span class="comment">/* This does exactly the same - converts<span class="phpdoc"> @myFile</span> to<span class="phpdoc"> @file</span> */</span>
-                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.004265919327735901gt; @myFile@file().mtime'</span>,
+                <span class="string">'.mtime'</span> =&gt; <span class="string">'0.2987782843410969gt; @myFile@file().mtime'</span>,
                 <span class="comment">/* File should be modified in the current year. 
                    Note the lack of brackets - we are using the current time's value.
                    We also use a shorthand syntax for $cmp.
                 */</span>
                 <span class="string">'.mtime.year'</span> =&gt; <span class="string">'@time.year'</span>,
                 <span class="comment">/* We call the myRandom typecast. The result should be grater than 50 */</span>
-                <span class="string">'@myRandom()'</span> =&gt; <span class="string">'0.004265919327735901gt; 50'</span>
+                <span class="string">'@myRandom()'</span> =&gt; <span class="string">'0.2987782843410969gt; 50'</span>
                 <span class="comment">/* As myFunc is a closure, we can skip the brackets. It will be called nevertheless. */</span>
-                <span class="string">'@myRandom'</span> =&gt; <span class="string">'0.004265919327735901gt; 50'</span>
+                <span class="string">'@myRandom'</span> =&gt; <span class="string">'0.2987782843410969gt; 50'</span>
             ]
         ]);
 
@@ -259,7 +259,7 @@ operator to time.</p>
                         Mustard - a readable dark theme for web developers!
                     </a></p>
                     <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
-<!--                     <p>This website was last updated at 2013-02-26T21:39:55.424Z</p>
+<!--                     <p>This website was last updated at 2013-02-26T22:15:39.049Z</p>
  -->                </footer>
             </div>
         </div>
@@ -273,5 +273,19 @@ operator to time.</p>
     
     
     <script defer="defer"  src="/vendor/jquery.js"></script><script defer="defer"  src="/vendor/log.js"></script><script defer="defer"  src="/vendor/modernizr.js"></script><script defer="defer"  src="/vendor/twitter-bootstrap/js/bootstrap.js"></script><script defer="defer"  src="/vendor/jquery.stickem.js"></script><script defer="defer"  src="/scripts/script.js"></script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-38075080-4']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>    
 </body>
 </html>
