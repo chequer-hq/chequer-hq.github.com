@@ -15,7 +15,18 @@ pageOrder: 1
     <div class="span3 mascotte">
     </div>
 </div>
+<div class="social well text-center">
 
+    <div class="pw-widget pw-size-medium">
+        <a class="pw-button-reddit"></a>
+        <a class="pw-button-googleplus"></a>
+        <a class="pw-button-facebook"></a>
+        <a class="pw-button-twitter"></a>
+        <a class="pw-button-post"></a>
+    </div>
+    <script src="http://i.po.st/share/script/post-widget.js#publisherKey=m60u6jjrm987g7e0d9ve" type="text/javascript"></script>
+
+</div>
 <div class="row captions">
     <div class="span3">
         <h2>Check by query</h2>
@@ -75,3 +86,7 @@ pageOrder: 1
 <div class="well text-center">
 It's *MIT* licensed, so share the love and contribute!
 </div>
+
+<div id="disqus_thread">
+</div>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
