@@ -233,7 +233,8 @@ worry about strings starting with <code>$</code>.</p>
 <p>Every shorthand should start with a dollar sign <code>$</code>. If first element is an operator, you can
   use it immediately. Otherwise you have to put a space:</p>
 <pre class="highlighted"><code class="php">  <span class="string">'$gt 10'</span> <span class="comment">// ok!</span>
-  <span class="string">'0.6467078030109406gt; 10'</span> <span class="comment">// ok!</span>
+  <span class="string">'$= 10'</span> <span class="comment">// ok!</span>
+  <span class="string">'$ = 10'</span> <span class="comment">// ok!</span>
   <span class="string">'$ .subkey &gt; 20'</span> <span class="comment">// ok!</span>
   <span class="string">'$ $gt 10'</span> <span class="comment">// ok!</span>
   <span class="string">'$ 1 + 1 = 2'</span> <span class="comment">// ok!</span>
@@ -368,8 +369,7 @@ set in the exception. This way <code>$or</code> and <code>$and</code> are made n
                         Mustard - a readable dark theme for web developers!
                     </a></p>
                     <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
-<!--                     <p>This website was last updated at 2013-02-26T22:15:39.049Z</p>
- -->                </footer>
+                </footer>
             </div>
         </div>
     
