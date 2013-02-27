@@ -93,8 +93,7 @@
                         Mustard - a readable dark theme for web developers!
                     </a></p>
                     <p>Copyright &copy; 2013 STAMINA Rafał Lindemann</p>
-<!--                     <p>This website was last updated at <%= @site.date.toISOString() %></p>
- -->                </footer>
+                </footer>
             </div>
         </div>
     
