@@ -46,18 +46,18 @@ $chequer->addTypecasts([
                    Note the lack of brackets on @myFile - we are using myFile's value
                    and then we convert it into a Chequer\File - by using the brackets this time.
                 */
-                '.mtime' => '$> @file(@myFile).mtime',
+                '.mtime' => '$ > @file(@myFile).mtime',
                 /* This does exactly the same - converts @myFile to @file */
-                '.mtime' => '$> @myFile@file().mtime',
+                '.mtime' => '$ > @myFile@file().mtime',
                 /* File should be modified in the current year. 
                    Note the lack of brackets - we are using the current time's value.
                    We also use a shorthand syntax for $cmp.
                 */
                 '.mtime.year' => '@time.year',
                 /* We call the myRandom typecast. The result should be grater than 50 */
-                '@myRandom()' => '$> 50'
+                '@myRandom()' => '$ > 50'
                 /* As myFunc is a closure, we can skip the brackets. It will be called nevertheless. */
-                '@myRandom' => '$> 50'
+                '@myRandom' => '$ > 50'
             ]
         ]);
 
