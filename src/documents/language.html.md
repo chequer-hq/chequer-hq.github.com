@@ -191,7 +191,8 @@ Every shorthand should start with a dollar sign `$`. If first element is an oper
 
   ```php
   '$gt 10' // ok!
-  '$> 10' // ok!
+  '$= 10' // ok!
+  '$ = 10' // ok!
   '$ .subkey > 20' // ok!
   '$ $gt 10' // ok!
   '$ 1 + 1 = 2' // ok!
