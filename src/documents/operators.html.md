@@ -170,6 +170,29 @@ shorthand syntax.
 
   Returns absolute value
 
+
+## $max
+``` js 
+'$max' : value | [value1, value2, ...]
+```
+
+  Return maximum numeric value
+
+  * if `operand` is an array, maximum value from the array is returned
+  * if `operand` is not an array, maximum is calculated from `value` and `operand`
+
+
+## $min
+``` js 
+'$min' : value | [value1, value2, ...]
+```
+
+  Return minimum numeric value
+
+  * if `operand` is an array, minimum value from the array is returned
+  * if `operand` is not an array, minimum is calculated from `value` and `operand`
+
+
 ## $size
 ``` js
 '$size' : query

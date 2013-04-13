@@ -249,6 +249,16 @@ the new value when using dot notation.
 
 ```
 
+### Assignment
+You can assign values to local typecasts with `:=` operator. The `value` will become the typecast name:
+
+```php
+'$ foo := bar' // assign "bar" to @foo
+'$ foo := bar; @foo := baz' // assign "bar" to @foo, and then assign "baz" to @bar
+'$ foo\.bar := bar' // assign "bar" to @foo.bar
+'$ file := bar' // exception will be thrown, because @file is a global typecast
+```
+
 ### Strings
 The strings can be unquoted if they don't contain any special characters. 
 These words will be converted into their respectable types:
