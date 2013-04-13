@@ -83,6 +83,48 @@ pageOrder: 1
     </div>
 </div>
 
+<div id="samples" class="carousel slide" data-interval="5000">
+  <ol class="carousel-indicators">
+    <li data-target="#samples" data-slide-to="0" class="active"></li>
+    <li data-target="#samples" data-slide-to="1"></li>
+    <li data-target="#samples" data-slide-to="2"></li>
+    <li data-target="#samples" data-slide-to="3"></li>
+  </ol>
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="active item">
+            <pre><code class="php">
+// Filter files on name, date and size
+'$ @file() => (.extension $in(php, html) 
+           && (.size $between (10000, 200000)) 
+           && (.mtime < -1 day))'
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre><code class="php">
+// Filter objects on properties and method results                
+'$ (.title ~ "/foo.*/") && (.isFooable()) && (.bars(100, TRUE) > 125)'
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre><code class="php">
+// Calculate ranks                
+'$ transit := (.subway + .bus + .tram); 
+   @transit > 10 ? .tourism + .nightlife + $min(10, @transit / 10) : FALSE'
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre><code class="javascript">
+// Find matching object                
+{'foo' : ['baz', 'bar'], 'bar' : 'foo', 'title' : {'$ne' : null}}
+            </code></pre>
+    </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left icon-circle-arrow-left" href="#samples" data-slide="prev"></a>
+  <a class="carousel-control right icon-circle-arrow-right" href="#samples" data-slide="next"></a>
+</div>
+
 <div class="well text-center">
 It's *MIT* licensed, so share the love and contribute!
 </div>

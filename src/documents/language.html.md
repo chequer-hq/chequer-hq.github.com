@@ -180,7 +180,7 @@ But this:
 // check if 'foo.txt' was modified around a week ago
 Chequer::checkValue('foo.txt', '$ $abs(@time.now - 1 week - @file().mtime) < 1 day');
 ```
-is doable in key:rule, but rather not very beatyfull.
+is doable in key:rule, but rather not very beautiful.
 
 Note, that you can disable this syntax by using setShorthandSyntax(). This way, you will not have to
 worry about strings starting with `$`.
@@ -377,7 +377,7 @@ Combining all this you can write `$= 10 || (= 20) || (! ~ "/\d/")` which is equi
 to `$ (. = 10) || (. = 10) || (!(~ "/\d/"))`.
 
 Note, that if both `value` and `parameter` are present, they both will be evaluated before passing
-them to the operator. This means that in this statement: `$ 1 = 2 && 2 = 3 && 3 = 4` first *TWO*
+them to the operator. This means that in this statement: `$ (1 = 2) && (2 = 3) && (3 = 4)` first *TWO*
 statements will evaluated, and just the third will be skipped.
 
 ### Missing values
