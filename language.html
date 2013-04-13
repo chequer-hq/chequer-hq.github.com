@@ -226,7 +226,7 @@ However, they <em>will</em> be discovered, because the array has continuous keys
 <p>But this:</p>
 <pre class="highlighted"><code class="php"><span class="comment">// check if 'foo.txt' was modified around a week ago</span>
 Chequer::checkValue(<span class="string">'foo.txt'</span>, <span class="string">'$ $abs(@time.now - 1 week - @file().mtime) &lt; 1 day'</span>);</code></pre>
-<p>is doable in key:rule, but rather not very beatyfull.</p>
+<p>is doable in key:rule, but rather not very beautiful.</p>
 <p>Note, that you can disable this syntax by using setShorthandSyntax(). This way, you will not have to
 worry about strings starting with <code>$</code>.</p>
 <a name="dollar" class="anchor" target="#dollar"></a><h3>Dollar</h3>
@@ -275,6 +275,12 @@ the new value when using dot notation.</p>
 <pre class="highlighted"><code class="php"><span class="string">'$ foo =&gt; ( . = foo )'</span> - uses <span class="string">"foo"</span> <span class="keyword">as</span> a <span class="keyword">new</span> context, so . = <span class="string">"foo"</span> is <span class="keyword">true</span> 
 <span class="string">'$ (one:1, two:2) =&gt; ( .two )'</span> - passes <span class="keyword">array</span> <span class="keyword">as</span> the <span class="keyword">new</span> context, so the result is <span class="number">2</span>
 <span class="string">'$ @time() =&gt; ((.year = 2013) &amp;&amp; (.month = 10))'</span> - passes the @time() object - you don<span class="string">'t have to cast it twice!</code></pre>
+<a name="assignment" class="anchor" target="#assignment"></a><h3>Assignment</h3>
+<p>You can assign values to local typecasts with <code>:=</code> operator. The <code>value</code> will become the typecast name:</p>
+<pre class="highlighted"><code class="php"><span class="string">'$ foo := bar'</span> <span class="comment">// assign "bar" to @foo</span>
+<span class="string">'$ foo := bar; @foo := baz'</span> <span class="comment">// assign "bar" to @foo, and then assign "baz" to @bar</span>
+<span class="string">'$ foo\.bar := bar'</span> <span class="comment">// assign "bar" to @foo.bar</span>
+<span class="string">'$ file := bar'</span> <span class="comment">// exception will be thrown, because @file is a global typecast</span></code></pre>
 <a name="strings" class="anchor" target="#strings"></a><h3>Strings</h3>
 <p>The strings can be unquoted if they don&#39;t contain any special characters. 
 These words will be converted into their respectable types:</p>
@@ -355,7 +361,7 @@ for the whole query, so no matter how deep you are, <code>.</code> will give you
 <p>Combining all this you can write <code>$= 10 || (= 20) || (! ~ &quot;/\d/&quot;)</code> which is equivalent 
 to <code>$ (. = 10) || (. = 10) || (!(~ &quot;/\d/&quot;))</code>.</p>
 <p>Note, that if both <code>value</code> and <code>parameter</code> are present, they both will be evaluated before passing
-them to the operator. This means that in this statement: <code>$ 1 = 2 &amp;&amp; 2 = 3 &amp;&amp; 3 = 4</code> first <em>TWO</em>
+them to the operator. This means that in this statement: <code>$ (1 = 2) &amp;&amp; (2 = 3) &amp;&amp; (3 = 4)</code> first <em>TWO</em>
 statements will evaluated, and just the third will be skipped.</p>
 <a name="missing-values" class="anchor" target="#missing-values"></a><h3>Missing values</h3>
 <p>If the value you are trying to access is missing, it will return null. It holds true even if

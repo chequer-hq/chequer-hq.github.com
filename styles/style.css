@@ -37,3 +37,8 @@ code{color:#800d0d;font-family:'Droid Sans Mono',Consolas,monospace;font-size:1e
 pre{font-size:1em;}
 pre code{font-family:'Droid Sans Mono',Consolas,monospace;font-size:0.8em;line-height:150%;}
 footer{text-align:right;margin-top:40px;border-top:1px solid #444444;padding-top:20px;padding-bottom:20px;font-family:'Roboto',sans-serif;font-size:0.7em;color:#777777;}footer p{margin:0.2em;}
+#samples .carousel-inner{background:#191919;border-radius:5px;}
+#samples .carousel-control{border:0;font-size:24px;background:transparent;top:50%;height:0px;vertical-align:middle;line-height:30px;margin-top:-15px;}
+#samples pre{height:150px;line-height:150px;background:transparent;padding:0px 80px;}
+#samples code{min-height:50px;display:inline-block;vertical-align:middle;width:100%;}
+.carousel .carousel-indicators li{margin:0px 2px;}

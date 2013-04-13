@@ -134,7 +134,7 @@ Match scalars, arrays, objects and grumpy cats against the query of Your choice!
     <div class="span3">
         <h2>Check by query</h2>
         <p>
-            Query <em>any</em> type of data for a result. 
+            Query *any* type of data for a result. 
             This way you can filter, validate, check and gather information.
         </p>
         <a class="btn" href="language.html"><i class="icon-beaker"></i> the Language</a>
@@ -164,8 +164,8 @@ Match scalars, arrays, objects and grumpy cats against the query of Your choice!
         <h2>Fast &amp; simple</h2>
         <p>
             Most of the stuff is done by one single class. Queries are strings or arrays. 
-            It&#39;s <em>fast</em> and <em>simple</em>.<br/>
-            Configuring classes through objects and factories is... well, <em>not</em>.
+            It's *fast* and *simple*.<br/>
+            Configuring classes through objects and factories is... well, *not*.
         </p>
     </div>
     <div class="span3">
@@ -181,19 +181,60 @@ Match scalars, arrays, objects and grumpy cats against the query of Your choice!
         <h2>Extensible</h2>
         <p>
             You can extend the class with your own operators, you can use
-            closures as checks, you can create your own value conversions and you can do it all at <em>runtime</em>.
+            closures as checks, you can create your own value conversions and you can do it all at *runtime*.
         </p>
     </div>
 </div>
 
+<div id="samples" class="carousel slide" data-interval="5000">
+  <ol class="carousel-indicators">
+    <li data-target="#samples" data-slide-to="0" class="active"></li>
+    <li data-target="#samples" data-slide-to="1"></li>
+    <li data-target="#samples" data-slide-to="2"></li>
+    <li data-target="#samples" data-slide-to="3"></li>
+  </ol>
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <div class="active item">
+            <pre class="highlighted"><code class="php">
+<span class="comment">// Filter files on name, date and size</span>
+<span class="string">'$ @file() =&gt; (.extension $in(php, html) 
+           &amp;&amp; (.size $between (10000, 200000)) 
+           &amp;&amp; (.mtime &lt; -1 day))'</span>
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre class="highlighted"><code class="php">
+<span class="comment">// Filter objects on properties and method results                </span>
+<span class="string">'$ (.title ~ "/foo.*/") &amp;&amp; (.isFooable()) &amp;&amp; (.bars(100, TRUE) &gt; 125)'</span>
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre class="highlighted"><code class="php">
+<span class="comment">// Calculate ranks                </span>
+<span class="string">'$ transit := (.subway + .bus + .tram); 
+   @transit &gt; 10 ? .tourism + .nightlife + $min(10, @transit / 10) : FALSE'</span>
+            </code></pre>
+    </div>
+    <div class="item">
+            <pre class="highlighted"><code class="javascript">
+<span class="comment">// Find matching object                </span>
+{<span class="string">'foo'</span> : [<span class="string">'baz'</span>, <span class="string">'bar'</span>], <span class="string">'bar'</span> : <span class="string">'foo'</span>, <span class="string">'title'</span> : {<span class="string">'$ne'</span> : <span class="literal">null</span>}}
+            </code></pre>
+    </div>
+  </div>
+  <!-- Carousel nav -->
+  <a class="carousel-control left icon-circle-arrow-left" href="#samples" data-slide="prev"></a>
+  <a class="carousel-control right icon-circle-arrow-right" href="#samples" data-slide="next"></a>
+</div>
+
 <div class="well text-center">
-It&#39;s <em>MIT</em> licensed, so share the love and contribute!
+It's *MIT* licensed, so share the love and contribute!
 </div>
 
-<p><div id="disqus_thread">
+<div id="disqus_thread">
 </div>
-<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a></p>
-
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
                 <footer>
                     <p>Code snippets flavoured with <a href="https://github.com/panrafal/mustard-theme">
                         Mustard - a readable dark theme for web developers!

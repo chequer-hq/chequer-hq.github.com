@@ -199,6 +199,20 @@ shorthand syntax.</p>
 <a name="-abs" class="anchor" target="#-abs"></a><h2>$abs</h2>
 <pre class="highlighted"><code class="javascript"><span class="string">'$abs'</span> : value</code></pre>
 <p>  Returns absolute value</p>
+<a name="-max" class="anchor" target="#-max"></a><h2>$max</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$max'</span> : value | [value1, value2, ...]</code></pre>
+<p>  Return maximum numeric value</p>
+<ul>
+<li>if <code>operand</code> is an array, maximum value from the array is returned</li>
+<li>if <code>operand</code> is not an array, maximum is calculated from <code>value</code> and <code>operand</code></li>
+</ul>
+<a name="-min" class="anchor" target="#-min"></a><h2>$min</h2>
+<pre class="highlighted"><code class="javascript"><span class="string">'$min'</span> : value | [value1, value2, ...]</code></pre>
+<p>  Return minimum numeric value</p>
+<ul>
+<li>if <code>operand</code> is an array, minimum value from the array is returned</li>
+<li>if <code>operand</code> is not an array, minimum is calculated from <code>value</code> and <code>operand</code></li>
+</ul>
 <a name="-size" class="anchor" target="#-size"></a><h2>$size</h2>
 <pre class="highlighted"><code class="javascript"><span class="string">'$size'</span> : query</code></pre>
 <p>  checks the size of array or string using the <code>query</code></p>
