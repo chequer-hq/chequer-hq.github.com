@@ -27,6 +27,8 @@ Whenever there is a reference to `query` it may be:
   strings starting with `$` are complex queries in sql-like [shorthand syntax][shorthand] <br/>
   great for complex queries
 
+* `callable` (closures and objects with __invoke) <br/>
+  callable will be called with ($value, $chequer, $matchAll) parameters
 
 * `string` or `number`<br/>
   the value should equal the query (with type conversion: 1 == '1')
