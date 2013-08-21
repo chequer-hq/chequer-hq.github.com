@@ -126,8 +126,9 @@ the <code>Chequer</code> object with a query</p>
 strings starting with <code>$</code> are complex queries in sql-like <a href="#shorthand-syntax">shorthand syntax</a> <br/>
 great for complex queries</p>
 </li>
-</ul>
-<ul>
+<li><p><code>callable</code> (closures and objects with __invoke) <br/>
+callable will be called with ($value, $chequer, $matchAll) parameters</p>
+</li>
 <li><p><code>string</code> or <code>number</code><br/>
 the value should equal the query (with type conversion: 1 == &#39;1&#39;)</p>
 </li>
